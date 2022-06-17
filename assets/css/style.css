@@ -1,0 +1,30 @@
+.badge-plan {
+    background-color: lightgray;
+}
+
+.badge-ongoing {
+    background-color: yellow;
+}
+
+.badge-need-review {
+    background-color: orange;
+}
+
+.badge-revision {
+    background: black;
+    color: white;
+}
+
+.badge-approved {
+    background-color: skyblue;
+}
+
+.badge-published {
+    background-color: green;
+    color: white;
+}
+
+.badge-cancel {
+    background-color: red;
+    color: white;
+}
