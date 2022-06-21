@@ -1,12 +1,11 @@
 <?php 
 
-require_once 'config.php';
+require_once 'db.php';
 
 $kategori = isset($_POST['inputKategori']) ? $_POST['inputKategori'] : '';
 
-$sqlInsert = "INSERT INTO calendar_content_categories (name) VALUES ('$kategori')";
+$result = $mysqli->query("INSERT INTO calendar_content_categories (name) VALUES ('$kategori')");
 
-$result = $mysqli->query($sqlInsert);
 $status = 400;
 $message = "Failed";
 

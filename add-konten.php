@@ -1,5 +1,5 @@
 <?php 
-require_once 'config.php';
+require_once 'db.php';
 
 $team = $_POST['team'];
 $nama = isset($_POST['inputNama']) ? $_POST['inputNama'] : '';

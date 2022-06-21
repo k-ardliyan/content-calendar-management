@@ -1,10 +1,12 @@
 <?php 
 
-    require_once 'config.php';
+    require_once 'db.php';
 
     // query to get all data from calendar_contents table join to table teams with id
-    $sqlQuery = "SELECT * , cc.name as cc_name, t.name as team_name, cp.name as cp_name FROM calendar_contents cc JOIN teams t ON cc.team_id = t.id JOIN content_pillars cp ON cc.content_pillar_id = cp.id";
-    $result = $mysqli->query($sqlQuery);
+    $result = $mysqli->query("SELECT * , cc.name as cc_name, t.name as team_name, cp.name as cp_name 
+                                    FROM calendar_contents cc 
+                                    JOIN teams t ON cc.team_id = t.id 
+                                    JOIN content_pillars cp ON cc.content_pillar_id = cp.id");
 
     foreach ($result as $row) {
         // switchcase
