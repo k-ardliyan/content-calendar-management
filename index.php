@@ -30,25 +30,44 @@
   ?>
   <script>
     $(document).ready(function () {
-
+      // show data onclick pillarModal
       $('#calendar').fullCalendar({
-        themeSystem: 'bootstrap4',
         header: {
           left: 'prev,next today',
           center: 'title',
           right: 'month,agendaWeek'
         },
+        themeSystem: 'bootstrap4',
+        timeFormat: 'H:mm',
         navLinks: true, // can click day/week names to navigate views
         eventLimit: true, // allow "more" link when too many events
         events: {
           url: 'data.php',
         },
+        eventRender: function (event, element, view) {
+            // if (event.allDay === 'true') {
+            //     event.allDay = true;
+            // } else {
+            //     event.allDay = false;
+            // }
+        },
         eventClick: function (event) {
           console.log(event);
-          if (event.url) {
-            //window.open(event.url, '_blank');
-            return false;
+          $('input#inputNama').val(event.cc_name);
+          $('input#inputUrl').val(event.url);
+          $('textarea#inputContent').val(event.content);
+          $('textarea#inputCopywriting').val(event.copywriting);
+          $('select#inputStatus').append('<option selected value="' + event.status + '">' + event.status + '</option>');
+          $('select#inputPillar').append('<option selected value="' + event.cp_name + '">' + event.cp_name + '</option>');
+          $('input#inputTanggal').val(event.date);
+          $('input#inputJam').val(event.time);
+          if (event.revision=="") {
+            $('textarea#inputRevisi').addClass('d-none');
+            $('label[for="inputRevisi"]').addClass('d-none');
+          } else {
+            $('textarea#inputRevisi').val(event.revision);
           }
+          $('#viewKontenModal').modal();
         },
       });
 
@@ -84,17 +103,12 @@
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewKontenModal">
-              <i class="bi-plus"></i>View Konten
-            </button>
-          </li>
-          <li class="nav-item">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pillarModal">
               <i class="bi-plus"></i>Pillar
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="getKategori()">
               <i class="bi-plus"></i>Kategori
             </button>
           </li>
@@ -170,7 +184,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="inputJam">Jam Posting</label>
-                <input type="time" name="inputTanggal" id="inputTanggal" class="form-control">
+                <input type="time" name="inputJam" id="inputJam" class="form-control">
               </div>
             </div>
             <div class="form-group">
@@ -201,25 +215,25 @@
           <form>
             <div class="form-group">
               <label for="inputNama">Nama</label>
-              <input type="text" class="form-control-plaintext" id="inputNama" placeholder="Membuat Konten Bootcamp"
+              <input type="text" class="form-control-plaintext" id="inputNama" placeholder="Kosong"
                 disabled>
             </div>
             <div class="form-group">
               <label for="inputUrl">URL</label>
-              <input type="text" class="form-control-plaintext" id="inputUrl" placeholder="https://www.gamelab.id"
+              <input type="text" class="form-control-plaintext" id="inputUrl" placeholder="Kosong"
                 disabled>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputContent">Content</label>
                 <textarea name="inputContent" id="inputContent" cols="28" rows="5" class="form-control-plaintext"
-                  disabled>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quia eum quam architecto laboriosam iure iusto voluptates ut, necessitatibus odit. Cupiditate fugiat reprehenderit, omnis quam dolores numquam nulla quia aut?</textarea>
+                  disabled>Kosong</textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="inputCopywriting">Copywriting</label>
                 <textarea name="inputCopywriting" id="inputCopywriting" cols="28" rows="5"
                   class="form-control-plaintext"
-                  disabled>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut eius quod quaerat qui minima debitis facilis? Eaque qui earum ducimus! Sed, pariatur architecto doloremque facilis fugiat harum possimus mollitia perferendis.</textarea>
+                  disabled>Kosong</textarea>
               </div>
             </div>
             <div class="form-row">
@@ -253,19 +267,18 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="inputJam">Jam Posting</label>
-                <input type="time" name="inputTanggal" id="inputTanggal" class="form-control-plaintext" disabled>
+                <input type="time" name="inputJam" id="inputJam" class="form-control-plaintext" disabled>
               </div>
             </div>
             <div class="form-group">
               <label for="inputRevisi">Revisi</label>
               <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control-plaintext"
-                disabled>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi vel ullam, nemo dolore hic amet animi qui delectus minus ea exercitationem ducimus, rem illum quia recusandae officia voluptatibus mollitia. Illum.</textarea>
+                disabled>Kosong</textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-warning">Edit</button>
         </div>
       </div>
     </div>
@@ -346,7 +359,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="addKategori">
             <div class="form-row">
               <div class="form-group col-md-9">
                 <input type="textx" name="inputKategori" id="inputKategori" class="form-control"
@@ -386,7 +399,7 @@
                 <th scope="row">3</th>
                 <td>Larry</td>
                 <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-warning btn-sm text-white" onclick="editKategori(id)"><i class="fa fa-edit"></i></button>
                   <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 </td>
               </tr>
@@ -401,6 +414,50 @@
     </div>
   </div>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $('#addKategori').submit(function(e) {
+      e.preventDefault();
+      var kategori = $('#inputKategori').val();
+      $.ajax({
+        url: 'addKategori.php',
+        type: 'POST',
+        data: {
+          inputKategori: kategori
+        },
+        success: function(data) {
+          data = JSON.parse(data);
+          if(data.status == 200){
+            alert(data.message);
+          }else{
+            alert(data.message);
+          }
+          console.log(data);
+        }
+      });
+    });
+    var getKategori = function() {
+      $.ajax({
+        url: 'getKategori.php',
+        type: 'GET',
+        success: function(data) {
+          data = JSON.parse(data);
+          if(data.status == 200){
+            $('#kategoriModal').modal('show');
+            data.data.forEach(d => {
+              <td onclick="editKategori(d.id)">
+                <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
+                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+              </td>
+            });
+
+          }else{
+            alert(data.message);
+          }
+          console.log(data);
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>
