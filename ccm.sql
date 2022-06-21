@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2022 at 09:03 AM
+-- Generation Time: Jun 21, 2022 at 08:43 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -37,8 +37,8 @@ CREATE TABLE `calendar_contents` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `revision` text NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `content_pillar_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
   `calendar_content_category_id` int(11) NOT NULL
@@ -49,7 +49,9 @@ CREATE TABLE `calendar_contents` (
 --
 
 INSERT INTO `calendar_contents` (`id`, `name`, `url`, `content`, `copywriting`, `status`, `date`, `time`, `revision`, `created_at`, `updated_at`, `content_pillar_id`, `team_id`, `calendar_content_category_id`) VALUES
-(1, 'boocamp', '', 'content', 'copy', 'plan', '2022-06-21', '15:49:47', '', '2022-06-20 08:50:17', '2022-06-20 08:50:17', 1, 1, 1);
+(1, 'bootcamp', '', 'content', 'copy', 'Plan', '2022-06-25', '15:00:00', '', '2022-06-21 04:22:08', '2022-06-21 14:28:44', 1, 1, 1),
+(2, 'berkarir', '', 'berkarir itu mudah', 'berkarir itu mudah menggunakan copywriting', 'Ongoing', '2022-06-24', '09:34:22', '', '2022-06-21 04:22:08', '2022-06-21 11:22:08', 2, 1, 2),
+(3, 'Kelas Industri', '', 'Iya beginilah konten dari kelas industri belum tau isinya seperti apa yang penting banyaklah ya hehe', 'Copywriting di sini merupakan konten yang menarik dari untuk dibaca para pembaca pastinya agar tertarik dengan konten yang dibuat', 'Need Review', '2022-06-21', '11:25:00', '', '2022-06-21 04:26:23', '2022-06-21 11:26:53', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -60,8 +62,8 @@ INSERT INTO `calendar_contents` (`id`, `name`, `url`, `content`, `copywriting`, 
 CREATE TABLE `calendar_content_categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -69,7 +71,12 @@ CREATE TABLE `calendar_content_categories` (
 --
 
 INSERT INTO `calendar_content_categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'facebook', '2022-06-20 08:49:43', '2022-06-20 08:49:43');
+(1, 'Facebook', '2022-06-21 04:21:22', '2022-06-21 11:21:22'),
+(2, 'Instagram', '2022-06-21 04:21:29', '2022-06-21 11:21:29'),
+(3, '', '2022-06-21 08:18:58', '2022-06-21 15:18:58'),
+(4, 'Tiktok', '2022-06-21 08:21:20', '2022-06-21 15:21:20'),
+(5, 'Web', '2022-06-21 08:28:06', '2022-06-21 15:28:06'),
+(6, '', '2022-06-21 08:28:14', '2022-06-21 15:28:14');
 
 -- --------------------------------------------------------
 
@@ -80,8 +87,8 @@ INSERT INTO `calendar_content_categories` (`id`, `name`, `created_at`, `updated_
 CREATE TABLE `content_pillars` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -89,7 +96,8 @@ CREATE TABLE `content_pillars` (
 --
 
 INSERT INTO `content_pillars` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'news', '2022-06-20 08:49:35', '2022-06-20 08:49:35');
+(1, 'News', '2022-06-21 04:21:00', '2022-06-21 11:21:00'),
+(2, 'Meme', '2022-06-21 04:21:13', '2022-06-21 11:21:13');
 
 -- --------------------------------------------------------
 
@@ -100,8 +108,8 @@ INSERT INTO `content_pillars` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -109,7 +117,7 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'k-ardliyan', '2022-06-14 06:29:02', '2022-06-14 06:29:02');
+(1, 'k-ardliyan', '2022-06-14 06:29:02', '2022-06-14 13:29:02');
 
 --
 -- Indexes for dumped tables
@@ -150,19 +158,19 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `calendar_contents`
 --
 ALTER TABLE `calendar_contents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `calendar_content_categories`
 --
 ALTER TABLE `calendar_content_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `content_pillars`
 --
 ALTER TABLE `content_pillars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teams`
