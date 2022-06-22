@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 require_once 'db.php';
 
-$kategori = isset($_POST['inputKategori']) ? $_POST['inputKategori'] : '';
+$id = isset($_POST['delKategori']) ? $_POST['delKategori'] : null;
 
-$result = $mysqli->query("INSERT INTO calendar_content_categories (name) VALUES ('$kategori')");
+$result = $mysqli->query("DELETE FROM calendar_content_categories
+                        WHERE id = '$id'");
 
 $status = 400;
 $message = "Failed";
@@ -20,6 +21,5 @@ $status = [
 ];
 
 echo json_encode($status);
-
-
+            
 ?>

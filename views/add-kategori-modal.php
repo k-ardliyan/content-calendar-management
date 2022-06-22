@@ -13,7 +13,7 @@
           <form id="addKategori">
             <div class="form-row">
               <div class="form-group col-md-9">
-                <input type="textx" name="inputKategori" id="inputKategori" class="form-control"
+                <input type="text" name="inputKategori" id="inputKategori" class="form-control"
                   placeholder="ex: Facebook, Instagram">
               </div>
               <div class="form-group col-md-3">
@@ -29,32 +29,7 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white" onclick="editKategori(id)"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="tableKategori"></tbody>
           </table>
         </div>
         <div class="modal-footer">

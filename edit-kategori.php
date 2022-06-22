@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 require_once 'db.php';
 
-$kategori = isset($_POST['inputKategori']) ? $_POST['inputKategori'] : '';
+$id = isset($_POST['id']) ? $_POST['id'] : null;
+$name = isset($_POST['name']) ? $_POST['name'] : null;
 
-$result = $mysqli->query("INSERT INTO calendar_content_categories (name) VALUES ('$kategori')");
+$result = $mysqli->query("UPDATE calendar_content_categories SET name = $name WHERE id = $id");
 
 $status = 400;
 $message = "Failed";
@@ -20,6 +21,5 @@ $status = [
 ];
 
 echo json_encode($status);
-
-
+            
 ?>

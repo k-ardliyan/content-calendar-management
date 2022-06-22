@@ -28,6 +28,9 @@ session_start();
   <!-- Locate Indonesia -->
   <script src='assets/js/id.js'></script>
   <script src="fc.js"></script>
+  <!-- DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
   <title>Content Calendar Management</title>
 </head>
