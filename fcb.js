@@ -66,18 +66,20 @@ var editKategori = function (id, name) {
       },
       success: function (data) {
         if (data.status == 200) {
-          $('form#addKategori').removeClass('d-none');
-          $('#dataKategori').removeClass('d-none');
-          $('form#editKategori').addClass('d-none');
-          $('#kategoriModalLabel').text('Kategori');
-          dataKategori();
-          $('form').trigger('reset');
+          setTimeout(() =>{
+            $('form#addKategori').removeClass('d-none');
+            $('#dataKategori').removeClass('d-none');
+            $('form#editKategori').addClass('d-none');
+            $('#kategoriModalLabel').text('Kategori');
+            dataKategori();
+            $('form').trigger('reset');
+          }, 1000)
           Swal.fire({
             icon: 'success',
             title: 'Sukses',
             text: 'Edit Kategori',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
           })
           console.log(data);
         } else {
