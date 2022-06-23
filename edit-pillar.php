@@ -2,9 +2,10 @@
 
 require_once 'db.php';
 
-$pillar = isset($_POST['inputPillar']) ? $_POST['inputPillar'] : null;
+$id = isset($_POST['idPillar']) ? $_POST['idPillar'] : null;
+$name = isset($_POST['namePillar']) ? $_POST['namePillar'] : null;
 
-$result = $mysqli->query("INSERT INTO content_pillars (name) VALUES ('$pillar')");
+$result = $mysqli->query("UPDATE content_pillars SET name = '$name' WHERE id = '$id'");
 
 if ($result) {
     $status = 200;

@@ -45,8 +45,8 @@
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="inputPillar">Pillar</label>
-                <select name="inputPillar" id="inputPillar" class="form-control">
+                <label for="selectPillar">Pillar</label>
+                <select name="selectPillar" id="selectPillar" class="form-control">
                   <option selected>Pilih..</option>
                   <option value="News">News</option>
                   <option value="Meme">Meme</option>

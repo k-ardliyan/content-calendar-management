@@ -10,10 +10,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="addPillar">
             <div class="form-row">
               <div class="form-group col-md-9">
-                <input type="textx" name="inputPillar" id="inputPillar" class="form-control"
+                <input type="text" name="inputPillar" id="inputPillar" class="form-control"
                   placeholder="ex: News, Meme">
               </div>
               <div class="form-group col-md-3">
@@ -21,41 +21,21 @@
               </div>
             </div>
           </form>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Pillar</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>
-                  <button type="button" class="btn btn-warning btn-sm text-white"><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <form id="editPillar" class="d-none">
+            <div class="form-row">
+              <div class="form-group col-md-9">
+                <input type="hidden" name="idPillar" id="idPillar">
+                <input type="text" name="updatePillar" id="updatePillar" class="form-control"
+                placeholder="ex: News, Meme">
+              </div>
+              <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-info w-100"><i class="fa fa-save"></i> Save</button>
+              </div>
+            </div>
+          </form>
+          <div id="dataPillar">
+
+          </div>
         </div>
       </div>
     </div>

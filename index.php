@@ -60,15 +60,10 @@ session_start();
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pillarModal">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pillarModal" onclick="dataPillar()">
               <i class="bi-plus"></i>Pillar
             </button>
           </li>
-          <!-- <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="getKategori()">
-              <i class="bi-plus"></i>Kategori
-            </button>
-          </li> -->
           <li class="nav-item">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
               <i class="bi-plus"></i>Kategori

@@ -35,8 +35,8 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputStatus">Status</label>
-                <select name="inputStatus" id="inputStatus" class="form-control-plaintext" disabled>
+                <label for="selectStatus">Status</label>
+                <select name="selectStatus" id="selectStatus" class="form-control-plaintext" disabled>
                   <option>Pilih..</option>
                   <option selected value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>
@@ -48,8 +48,8 @@
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="inputPillar">Pillar</label>
-                <select name="inputPillar" id="inputPillar" class="form-control-plaintext" disabled>
+                <label for="selectPillar">Pillar</label>
+                <select name="selectPillar" id="selectPillar" class="form-control-plaintext" disabled>
                   <option>Pilih..</option>
                   <option selected value="News">News</option>
                   <option value="Meme">Meme</option>

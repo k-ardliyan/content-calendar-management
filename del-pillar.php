@@ -2,9 +2,10 @@
 
 require_once 'db.php';
 
-$pillar = isset($_POST['inputPillar']) ? $_POST['inputPillar'] : null;
+$id = isset($_POST['delPillar']) ? $_POST['delPillar'] : null;
 
-$result = $mysqli->query("INSERT INTO content_pillars (name) VALUES ('$pillar')");
+$result = $mysqli->query("DELETE FROM content_pillars
+                        WHERE id = '$id'");
 
 if ($result) {
     $status = 200;

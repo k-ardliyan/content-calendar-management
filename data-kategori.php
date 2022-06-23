@@ -1,4 +1,4 @@
-<table class="table" id="table">
+<table class="table" id="tableKategori">
     <thead>
         <tr>
             <th scope="col">No</th>
