@@ -2,10 +2,10 @@
 
 require_once 'db.php';
 
-$id = isset($_POST['id']) ? $_POST['id'] : null;
-$name = isset($_POST['name']) ? $_POST['name'] : null;
+$id = isset($_POST['idKategori']) ? $_POST['idKategori'] : null;
+$name = isset($_POST['nameKategori']) ? $_POST['nameKategori'] : null;
 
-$result = $mysqli->query("UPDATE calendar_content_categories SET name = $name WHERE id = $id");
+$result = $mysqli->query("UPDATE calendar_content_categories SET name = '$name' WHERE id = '$id'");
 
 $status = 400;
 $message = "Failed";

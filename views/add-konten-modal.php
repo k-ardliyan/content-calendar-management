@@ -1,7 +1,7 @@
 <!-- Modal Add Konten -->
 <div class="modal fade" id="kontenModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="kontenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="kontenModalLabel">Tambah Konten</h5>

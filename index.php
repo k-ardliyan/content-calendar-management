@@ -64,8 +64,13 @@ session_start();
               <i class="bi-plus"></i>Pillar
             </button>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="getKategori()">
+              <i class="bi-plus"></i>Kategori
+            </button>
+          </li> -->
+          <li class="nav-item">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
               <i class="bi-plus"></i>Kategori
             </button>
           </li>
@@ -89,6 +94,8 @@ session_start();
   ?>
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- Add Swal -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="fcb.js"></script>
 </body>
 
