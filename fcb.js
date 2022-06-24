@@ -47,10 +47,8 @@ var editKategori = function (id, name) {
     }
   })
   setTimeout(() => {
-    $('#kategoriModalLabel').text('Edit Kategori');
-    $('form#addKategori').addClass('d-none');
-    $('#dataKategori').addClass('d-none');
-    $('form#editKategori').removeClass('d-none');
+    $('#kategoriModal').modal('hide');
+    $('#kategoriEditModal').modal('show');
     $('input#idKategori').val(id);
     $('input#updateKategori').val(name);
   }, 500);
@@ -69,12 +67,9 @@ var editKategori = function (id, name) {
       success: function (data) {
         if (data.status == 200) {
           setTimeout(() => {
-            $('form#addKategori').removeClass('d-none');
-            $('#dataKategori').removeClass('d-none');
-            $('form#editKategori').addClass('d-none');
-            $('#kategoriModalLabel').text('Kategori');
+            $('#kategoriEditModal').modal('hide');
+            $('#kategoriModal').modal('show');
             dataKategori();
-            $('form').trigger('reset');
           }, 1000)
           Swal.fire({
             icon: 'success',
@@ -207,10 +202,8 @@ var editPillar = function (id, name) {
     }
   })
   setTimeout(() => {
-    $('#pillarModalLabel').text('Edit Pillar');
-    $('form#addPillar').addClass('d-none');
-    $('#dataPillar').addClass('d-none');
-    $('form#editPillar').removeClass('d-none');
+    $('#pillarModal').modal('hide');
+    $('#pillarEditModal').modal('show');
     $('input#idPillar').val(id);
     $('input#updatePillar').val(name);
   }, 500);
@@ -229,12 +222,9 @@ var editPillar = function (id, name) {
       success: function (data) {
         if (data.status == 200) {
           setTimeout(() => {
-            $('form#addPillar').removeClass('d-none');
-            $('#dataPillar').removeClass('d-none');
-            $('form#editPillar').addClass('d-none');
-            $('#pillarModalLabel').text('Pillar');
+            $('#pillarModal').modal('show');
+            $('#pillarEditModal').modal('hide');
             dataPillar();
-            $('form').trigger('reset');
           }, 1000)
           Swal.fire({
             icon: 'success',

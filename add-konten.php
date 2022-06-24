@@ -12,7 +12,7 @@ $tanggal = isset($_POST['inputTanggal']) ? $_POST['inputTanggal'] : '';
 $jam = isset($_POST['inputJam']) ? $_POST['inputJam'] : '';
 $revisi = isset($_POST['inputRevisi']) ? $_POST['inputRevisi'] : '';
 $pillar = $_POST['selectPillar']; // id
-$team = $_POST['team']; // id
+$team = $_SESSION['team_id']; // id
 $kategori = $_POST['kategori']; // id
 
 $result = $mysqli->query("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, revision, content_pillar_id, team_id, calendar_content_category_id) VALUES ('$nama', '$url', '$content', '$copywriting', '$status', '$tanggal', '$jam', '$revisi', '$pillar', '$team', '$kategori')");

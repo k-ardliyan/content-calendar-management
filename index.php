@@ -4,9 +4,9 @@ require_once 'db.php';
 
 $sqlQuery = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
 
-$_SESSION['team_id'] = 1;
 session_start();
-  
+$_SESSION['team_id'] = 1;
+
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +84,9 @@ session_start();
   require_once 'views/add-konten-modal.php';
   require_once 'views/add-pillar-modal.php';
   require_once 'views/add-kategori-modal.php'; 
+  // require_once 'views/edit-konten-modal.php';
+  require_once 'views/edit-pillar-modal.php';
+  require_once 'views/edit-kategori-modal.php';
   require_once 'views/detail-konten-modal.php';
   
   ?>

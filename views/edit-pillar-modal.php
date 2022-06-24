@@ -1,29 +1,27 @@
 <!-- Modal Add Pillar -->
-<div class="modal fade" id="pillarModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="pillarEditModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="pillarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="pillarModalLabel">Pillar</h5>
+          <h5 class="modal-title" id="pillarModalLabel">Edit Pillar</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form id="addPillar">
+          <form id="editPillar">
             <div class="form-row">
               <div class="form-group col-md-9">
-                <input type="text" name="inputPillar" id="inputPillar" class="form-control"
-                  placeholder="ex: News, Meme">
+                <input type="hidden" name="idPillar" id="idPillar">
+                <input type="text" name="updatePillar" id="updatePillar" class="form-control"
+                placeholder="ex: News, Meme">
               </div>
               <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-success w-100"><i class="fa fa-plus"></i> Add</button>
+                <button type="submit" class="btn btn-info w-100"><i class="fa fa-save"></i> Save</button>
               </div>
             </div>
           </form>
-          <div id="dataPillar">
-
-          </div>
         </div>
       </div>
     </div>
