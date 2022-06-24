@@ -1,5 +1,5 @@
 <!-- Modal Edit Kategori -->
-<div class="modal fade" id="kategoriEditModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="kategoriEditModal"  tabindex="-1"
     aria-labelledby="kategoriEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

@@ -1,5 +1,13 @@
+<?php 
+
+require_once 'db.php';
+
+$resultPillar = $mysqli->query("SELECT * FROM content_pillars");
+
+?>
+
 <!-- Modal Add Konten -->
-<div class="modal fade" id="kontenModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="kontenModal"  tabindex="-1"
     aria-labelledby="kontenModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -11,6 +19,7 @@
         </div>
         <div class="modal-body">
           <form id="addKonten">
+            <input type="hidden" name="inputTeam" id="inputTeam" value="<?= $_SESSION['team_id']  ?>">
             <div class="form-group">
               <label for="inputNama">Nama</label>
               <input type="text" class="form-control" id="inputNama" placeholder="ex: Membuat Konten Bootcamp">
@@ -47,10 +56,9 @@
               <div class="form-group col-md-6">
                 <label for="selectPillar">Pillar</label>
                 <select name="selectPillar" id="selectPillar" class="form-control">
-                  <option selected>Pilih..</option>
-                  <option value="News">News</option>
-                  <option value="Meme">Meme</option>
-                  <option value="Sharing">Sharing</option>
+                  <?php foreach($resultPillar as $row): ?>
+                  <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                  <?php endforeach; ?>
                 </select>
               </div>
             </div>
@@ -68,12 +76,12 @@
               <label for="inputRevisi">Revisi</label>
               <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control"></textarea>
             </div>
-          </form>
+          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

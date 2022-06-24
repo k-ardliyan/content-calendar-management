@@ -1,5 +1,5 @@
 <!-- Modal Add Kategori -->
-<div class="modal fade" id="kategoriModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="kategoriModal"  tabindex="-1"
     aria-labelledby="kategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

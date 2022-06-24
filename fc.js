@@ -30,11 +30,13 @@ $(document).ready(function () {
             $('select#detailPillar').append('<option selected value="' + event.cp_name + '">' + event.cp_name + '</option>');
             $('input#detailTanggal').val(event.date);
             $('input#detailJam').val(event.time);
-            if (event.revision == "") {
+            if (event.status === 'Revision') {
+                $('textarea#detailRevisi').val(event.revision);
+                $('textarea#detailRevisi').removeClass('d-none');
+                $('label[for="detailRevisi"]').removeClass('d-none');
+            } else {
                 $('textarea#detailRevisi').addClass('d-none');
                 $('label[for="detailRevisi"]').addClass('d-none');
-            } else {
-                $('textarea#detailRevisi').val(event.revision);
             }
             $('#viewKontenModal').modal();
         },

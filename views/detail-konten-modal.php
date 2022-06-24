@@ -1,3 +1,7 @@
+<?php 
+
+?>
+
 <!-- Modal View Konten -->
 <div class="modal fade" id="viewKontenModal" tabindex="-1" aria-labelledby="kontenModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -75,7 +79,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning">Edit</button>
+          <button type="button" class="btn btn-warning" onclick="editKonten()">Edit</button>
+          <button type="button" class="btn btn-danger" onclick="delKonten()">Hapus</button>
         </div>
       </div>
     </div>

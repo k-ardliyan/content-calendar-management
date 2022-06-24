@@ -256,16 +256,10 @@ var dataPillar = function () {
   });
 }
 
-// Load Pilihan Kategori
-// var loadKategoriKalendar = function () {
-//   var test = $('#loadKategoriKalendar').val();
-//   console.log(test)
-// }
-
+// Load Data Kategori di index
 $('#loadKategoriKalendar').on('change', function(e) {
-  var test = $('#loadKategoriKalendar').val();
-  // console.log(test)
-  window.location.href = "?kategori=" + test;
+  var load = $('#loadKategoriKalendar').val();
+  window.location.href = "?kategori=" + load;
 })
 
 // Tambah Konten
@@ -280,7 +274,48 @@ $('#addKonten').submit(function (e) {
   var jam = $('#inputJam').val();
   var revisi = $('#inputRevisi').val();
   var pillar = $('#selectPillar').val();
-  var kategori = $('#inputKategori').val();
+  // get kategori from ?kategori=
+  var kategori = window.location.search.split('=')[1];
   var team = $('#inputTeam').val();
-  $.ajax({})
+  $.ajax({
+    url: 'add-konten.php',
+    type: 'POST',
+    data: {
+      inputNama: nama,
+      inputUrl: url,
+      inputContent: content,
+      inputCopywriting: copywriting,
+      selectStatus: status,
+      inputTanggal: tanggal,
+      inputJam: jam,
+      inputRevisi: revisi,
+      selectPillar: pillar,
+      inputTeam: team,
+      inputKategori: kategori,
+    },
+    dataType: 'json',
+    success: function (data) {
+      if (data.status == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: 'Konten Telah Ditambahkan',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        $('#kontenModal').modal('hide');
+        $('#calendar').fullCalendar('refetchEvents');
+      } else {
+        console.log(data);
+      }
+    }
+  })
 })
+
+// Hapus Konten
+var delKonten = function (id) {
+
+}
+
+// Edit Konten
+var editKonten = function (){}

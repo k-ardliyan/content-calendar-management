@@ -8,6 +8,7 @@ $resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
 foreach ($resultKategori as $row) {
     $dataKategori[] = $row;
 }
+
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
 
 
