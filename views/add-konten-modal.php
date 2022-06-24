@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="addKonten">
             <div class="form-group">
               <label for="inputNama">Nama</label>
               <input type="text" class="form-control" id="inputNama" placeholder="ex: Membuat Konten Bootcamp">
@@ -32,8 +32,8 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputStatus">Status</label>
-                <select name="inputStatus" id="inputStatus" class="form-control">
+                <label for="selectStatus">Status</label>
+                <select name="selectStatus" id="selectStatus" class="form-control">
                   <option selected>Pilih..</option>
                   <option value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>

@@ -265,3 +265,20 @@ var dataPillar = function () {
     }
   });
 }
+
+// Tambah Konten
+$('#addKonten').submit(function (e) {
+  e.preventDefault();
+  var nama = $('#inputNama').val();
+  var url = $('#inputUrl').val();
+  var content = $('#inputContent').val();
+  var copywriting = $('#inputCopywriting').val();
+  var status = $('#selectStatus').val();
+  var tanggal = $('#inputTanggal').val();
+  var jam = $('#inputJam').val();
+  var revisi = $('#inputRevisi').val();
+  var pillar = $('#selectPillar').val();
+  var kategori = $('#inputKategori').val();
+  var team = $('#inputTeam').val();
+  $.ajax({})
+})
