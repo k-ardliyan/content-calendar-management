@@ -256,6 +256,18 @@ var dataPillar = function () {
   });
 }
 
+// Load Pilihan Kategori
+// var loadKategoriKalendar = function () {
+//   var test = $('#loadKategoriKalendar').val();
+//   console.log(test)
+// }
+
+$('#loadKategoriKalendar').on('change', function(e) {
+  var test = $('#loadKategoriKalendar').val();
+  // console.log(test)
+  window.location.href = "?kategori=" + test;
+})
+
 // Tambah Konten
 $('#addKonten').submit(function (e) {
   e.preventDefault();

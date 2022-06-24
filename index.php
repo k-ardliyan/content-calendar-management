@@ -2,7 +2,14 @@
   
 require_once 'db.php';
 
-$sqlQuery = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
+$result = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
+$resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
+
+foreach ($resultKategori as $row) {
+    $dataKategori[] = $row;
+}
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
+
 
 session_start();
 $_SESSION['team_id'] = 1;
@@ -16,6 +23,8 @@ $_SESSION['team_id'] = 1;
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/calendar.png">
   <!-- Boostrap 4.6-->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <!-- Icon Fontawesome -->
@@ -47,11 +56,10 @@ $_SESSION['team_id'] = 1;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto align-items-center" style="grid-gap: 12px;">
           <li class="nav-item active">
-            <select class="form-select nav-link" aria-label="Default select example">
-              <option selected>Pilih Kategori</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select class="form-select nav-link" id="loadKategoriKalendar" onselect="loadKategoriKalendar()">
+              <?php foreach($resultKategori as $row): ?>
+              <option value="<?= $row['id'] ?>" <?= $row['id'] == $kategori ? 'selected':'' ?> ><?= $row['name']?></option>
+              <?php endforeach ?>
             </select>
           </li>
           <li class="nav-item">

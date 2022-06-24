@@ -11,32 +11,32 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="inputNama">Nama</label>
-              <input type="text" class="form-control-plaintext" id="inputNama" placeholder="Kosong"
+              <label for="detailNama">Nama</label>
+              <input type="text" class="form-control-plaintext" id="detailNama" placeholder="Kosong"
                 disabled>
             </div>
             <div class="form-group">
-              <label for="inputUrl">URL</label>
-              <input type="text" class="form-control-plaintext" id="inputUrl" placeholder="Kosong"
+              <label for="detailUrl">URL</label>
+              <input type="text" class="form-control-plaintext" id="detailUrl" placeholder="Kosong"
                 disabled>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputContent">Content</label>
-                <textarea name="inputContent" id="inputContent" cols="28" rows="5" class="form-control-plaintext"
+                <label for="detailContent">Content</label>
+                <textarea name="detailContent" id="detailContent" cols="28" rows="5" class="form-control-plaintext"
                   disabled>Kosong</textarea>
               </div>
               <div class="form-group col-md-6">
-                <label for="inputCopywriting">Copywriting</label>
-                <textarea name="inputCopywriting" id="inputCopywriting" cols="28" rows="5"
+                <label for="detailCopywriting">Copywriting</label>
+                <textarea name="detailCopywriting" id="detailCopywriting" cols="28" rows="5"
                   class="form-control-plaintext"
                   disabled>Kosong</textarea>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="selectStatus">Status</label>
-                <select name="selectStatus" id="selectStatus" class="form-control-plaintext" disabled>
+                <label for="detailStatus">Status</label>
+                <select name="detailStatus" id="detailStatus" class="form-control-plaintext" disabled>
                   <option>Pilih..</option>
                   <option selected value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>
@@ -48,8 +48,8 @@
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="selectPillar">Pillar</label>
-                <select name="selectPillar" id="selectPillar" class="form-control-plaintext" disabled>
+                <label for="detailPillar">Pillar</label>
+                <select name="detailPillar" id="detailPillar" class="form-control-plaintext" disabled>
                   <option>Pilih..</option>
                   <option selected value="News">News</option>
                   <option value="Meme">Meme</option>
@@ -59,17 +59,17 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputTanggal">Tanggal</label>
-                <input type="date" name="inputTanggal" id="inputTanggal" class="form-control-plaintext" disabled>
+                <label for="detailTanggal">Tanggal</label>
+                <input type="date" name="detailTanggal" id="detailTanggal" class="form-control-plaintext" disabled>
               </div>
               <div class="form-group col-md-6">
-                <label for="inputJam">Jam Posting</label>
-                <input type="time" name="inputJam" id="inputJam" class="form-control-plaintext" disabled>
+                <label for="detailJam">Jam Posting</label>
+                <input type="time" name="detailJam" id="detailJam" class="form-control-plaintext" disabled>
               </div>
             </div>
             <div class="form-group">
-              <label for="inputRevisi">Revisi</label>
-              <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control-plaintext"
+              <label for="detailRevisi">Revisi</label>
+              <textarea name="detailResivi" id="detailRevisi" cols="30" rows="5" class="form-control-plaintext"
                 disabled>Kosong</textarea>
             </div>
           </form>

@@ -1,48 +1,31 @@
-<?php 
-
-$orders = [
-    ['id' => 1, 'name' => 'Bakmie', 'price' => 5000],
-    ['id' => 2, 'name' => 'Nasi Goreng', 'price' => 10000],
-    ['id' => 3, 'name' => 'Burjo', 'price' => 4000],
-    ['id' => 4, 'name' => 'Boba', 'price' => 7000],
-    ['id' => 5, 'name' => 'Martabak', 'price' => 12000],
-];
-
-function tambahData(){
-    echo "<tr>";
-    echo "<td>dummy</td>";
-    echo "<td>dummy</td>";
-    echo "<td>dummy</td>";
-    echo "</tr>";
-}
-
-?>
-<table border="1">
-        <tr>
-            <th>Order Id</th>
-            <th>Name</th>
-            <th>Price</th>
+<form method="POST">
+    <table>
+        <tr> 
+            <td>Nama:</td>
+            <td>:</td>
+            <td><input type="text" name="nama" id="nama"></td>
         </tr>
-<?php
-foreach ($orders as $order):
-?>
         <tr>
-            <td><?php echo $order['id']; ?></td>
-            <td><?php echo $order['name']; ?></td>
-            <td><?php echo $order['price']; ?></td>
+            <td>Keperluan</td>
+            <td>:</td>
+            <td><input type="text" name="keperluan" id="keperluan"></td>
         </tr>
-<?php endforeach;
-// var_dump($orders);
-
-?>
-<tr>
-    <button onclick="<?php tambahData(); ?>">Tambah Data</button>
-</tr>
-
-</table>
+        <tr>
+            <td colspan="3"><input type="submit" name="submit" value="submit"></td>
+        </tr>
+    </table>
+</form>
 
 <?php 
 
-var_dump($GLOBALS);
-
+if (isset($_POST['submit'])):
+    $datas = [
+        'nama' => $_POST['nama'],
+        'keperluan' => $_POST['keperluan']
+    ];
+    // echo to html
+    foreach ($datas as $key => $value):
+        echo $value . '<br>';
+    endforeach;
+endif;
 ?>

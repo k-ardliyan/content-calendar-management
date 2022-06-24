@@ -64,7 +64,7 @@
                 <input type="time" name="inputJam" id="inputJam" class="form-control">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
               <label for="inputRevisi">Revisi</label>
               <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control"></textarea>
             </div>

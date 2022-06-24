@@ -11,7 +11,7 @@ $(document).ready(function () {
         navLinks: true, // can click day/week names to navigate views
         eventLimit: true, // allow "more" link when too many events
         events: {
-            url: 'data.php',
+            url: 'data.php?kategori=' + $('#loadKategoriKalendar').val(),
         },
         eventRender: function (event, element, view) {
             // if (event.allDay === 'true') {
@@ -22,19 +22,19 @@ $(document).ready(function () {
         },
         eventClick: function (event) {
             console.log(event);
-            $('input#inputNama').val(event.cc_name);
-            $('input#inputUrl').val(event.url);
-            $('textarea#inputContent').val(event.content);
-            $('textarea#inputCopywriting').val(event.copywriting);
-            $('select#inputStatus').append('<option selected value="' + event.status + '">' + event.status + '</option>');
-            $('select#inputPillar').append('<option selected value="' + event.cp_name + '">' + event.cp_name + '</option>');
-            $('input#inputTanggal').val(event.date);
-            $('input#inputJam').val(event.time);
+            $('input#detailNama').val(event.cc_name);
+            $('input#detailUrl').val(event.url);
+            $('textarea#detailContent').val(event.content);
+            $('textarea#detailCopywriting').val(event.copywriting);
+            $('select#detailStatus').append('<option selected value="' + event.status + '">' + event.status + '</option>');
+            $('select#detailPillar').append('<option selected value="' + event.cp_name + '">' + event.cp_name + '</option>');
+            $('input#detailTanggal').val(event.date);
+            $('input#detailJam').val(event.time);
             if (event.revision == "") {
-                $('textarea#inputRevisi').addClass('d-none');
-                $('label[for="inputRevisi"]').addClass('d-none');
+                $('textarea#detailRevisi').addClass('d-none');
+                $('label[for="detailRevisi"]').addClass('d-none');
             } else {
-                $('textarea#inputRevisi').val(event.revision);
+                $('textarea#detailRevisi').val(event.revision);
             }
             $('#viewKontenModal').modal();
         },
