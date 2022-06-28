@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+    body {
+      background-color: antiquewhite;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .modal-body {
+      font-weight: 300;
+    }
+
+    .fa-1x {
+      font-size: 0.7em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="" id="viewKontenModal" tabindex="-1" aria-labelledby="kontenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered shadow-lg">
+      <div class="modal-content">
+        <div class="modal-body p-4">
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="close ml-3" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+                    data-placement="bottom" title="Tutup">
+                    <span aria-hidden="true" class="fa fa-1x fa-times"></span>
+                  </button>
+                  <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Hapus">
+                    <span aria-hidden="true" class="fa fa-1x fa-trash-alt"></span>
+                  </button>
+                  <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Ubah">
+                    <span aria-hidden="true" class="fa fa-1x fa-pencil-alt"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="row align-items-end">
+                <div class="col">
+                  <span data-toggle="tooltip" data-placement="top" title="Kategori">Facebook &#124;</span>
+                  <span class="badge-info badge-pill" data-toggle="tooltip" data-placement="top"
+                    title="Status">Plan</span>
+                  <span data-toggle="tooltip" data-placement="top" title="Team">&#124; k-ardliyan</span>
+                  <h2>Judul Text</h2>
+                  <div>
+                    <span>Kamis, 30 Juni 2020 &#124;</span>
+                    <span>15.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-end my-2" data-toggle="tooltip" data-placement="left" title="URL">
+                <div class="col-1"><img src="assets/images/link.png" alt="url" width="24px"></div>
+                <div class="col">www.google.com</div>
+              </div>
+              <div class="row my-2" data-toggle="tooltip" data-placement="left" title="Konten">
+                <div class="col-1"><img src="assets/images/writer.png" alt="content" width="24px"></div>
+                <div class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</div>
+              </div>
+              <div class="row my-2" data-toggle="tooltip" data-placement="left" title="Copywriting">
+                <div class="col-1"><img src="assets/images/copywriting.png" alt="copywriting" width="24px"></div>
+                <div class="col">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat aspernatur eligendi
+                  beatae maxime est adipisci rerum ut perferendis, illo molestiae, architecto aut, quibusdam sed.
+                  Officiis magnam cum error molestiae esse!</div>
+              </div>
+              <div class="row my-2" data-toggle="tooltip" data-placement="left" title="Revisi">
+                <div class="col-1"><img src="assets/images/revision.png" alt="revisi" width="24px"></div>
+                <div class="col">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, velit! Enim velit
+                  blanditiis maxime. Exercitationem, voluptate illum, sapiente minus repellendus fuga repudiandae, nobis
+                  molestiae voluptates explicabo quis dolore quos vero?</div>
+              </div>
+            </div>
+          </div>
+          <!-- <form>
+                <div class="form-group">
+                  <label for="detailNama">Nama</label>
+                  <input type="text" class="form-control-plaintext" id="detailNama" placeholder="Kosong"
+                    disabled>
+                </div>
+                <div class="form-group">
+                  <label for="detailUrl">URL</label>
+                  <input type="text" class="form-control-plaintext" id="detailUrl" placeholder="Kosong"
+                    disabled>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="detailContent">Content</label>
+                    <textarea name="detailContent" id="detailContent" cols="28" rows="5" class="form-control-plaintext"
+                      disabled>Kosong</textarea>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="detailCopywriting">Copywriting</label>
+                    <textarea name="detailCopywriting" id="detailCopywriting" cols="28" rows="5"
+                      class="form-control-plaintext"
+                      disabled>Kosong</textarea>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="detailStatus">Status</label>
+                    <select name="detailStatus" id="detailStatus" class="form-control-plaintext" disabled>
+                      <option>Pilih..</option>
+                      <option selected value="Plan" class="badge-plan">Plan</option>
+                      <option value="Ongoing" class="badge-ongoing">Ongoing</option>
+                      <option value="Need Review" class="badge-need-review">Need Review</option>
+                      <option value="Revision" class="badge-revision">Revision</option>
+                      <option value="Approved" class="badge-approved">Approved</option>
+                      <option value="Published" class="badge-published">Published</option>
+                      <option value="Cancel" class="badge-cancel">Cancel</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="detailPillar">Pillar</label>
+                    <select name="detailPillar" id="detailPillar" class="form-control-plaintext" disabled>
+                      <option>Pilih..</option>
+                      <option selected value="News">News</option>
+                      <option value="Meme">Meme</option>
+                      <option value="Sharing">Sharing</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="detailTanggal">Tanggal</label>
+                    <input type="date" name="detailTanggal" id="detailTanggal" class="form-control-plaintext" disabled>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="detailJam">Jam Posting</label>
+                    <input type="time" name="detailJam" id="detailJam" class="form-control-plaintext" disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="detailRevisi">Revisi</label>
+                  <textarea name="detailResivi" id="detailRevisi" cols="30" rows="5" class="form-control-plaintext"
+                    disabled>Kosong</textarea>
+                </div>
+              </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+    integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+  </script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+</body>
+
+</html>
