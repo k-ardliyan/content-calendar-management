@@ -2,8 +2,69 @@
 
 ?>
 
-<!-- Modal View Konten -->
 <div class="modal fade" id="viewKontenModal" tabindex="-1" aria-labelledby="kontenModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <!-- Button Modal Detail -->
+                <button type="button" class="close ml-3" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="Tutup">
+                  <span aria-hidden="true"><i class='bx bx-x'></i></span>
+                </button>
+                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Hapus" onclick="">
+                  <span aria-hidden="true"><i class='bx bx-trash'></i></span>
+                </button>
+                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Ubah" onclick="">
+                  <span aria-hidden="true"><i class='bx bx-pencil'></i></span>
+                </button>
+              </div>
+            </div>
+            <!-- Detail Konten -->
+            <div class="row align-items-end">
+              <div class="col mb-3">
+                <span id="detailCategory" data-toggle="tooltip" data-placement="top" title="Kategori">Facebook &#124;</span>
+                <span id="detailStatus" class="badge-info badge-pill" data-toggle="tooltip" data-placement="top"
+                  title="Status">Plan</span>
+                <span data-toggle="tooltip" data-placement="top" title="Team">&#124; <i class="bx bx-user"></i> k-ardliyan</span>
+                <h3 id="detailName" class="mb-0 mt-2">Judul Text</h3>
+                <div>
+                  <span id="detailDate">Kamis, 30 Juni 2020 &#124;</span>
+                  <span id="detailTime">15.00</span>
+                </div>
+              </div>
+            </div>
+            <div id="detailUrlContainer" class="row align-items-end mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="URL">
+              <div class="col-1"><i class="bx bx-link bx-sm"></i></div>
+              <div id="detailUrl" class="col align-self-center">www.google.com</div>
+            </div>
+            <div class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Konten">
+              <div class="col-1"><i class="bx bx-align-left bx-sm"></i></div>
+              <div id="detailContent" class="col align-self-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</div>
+            </div>
+            <div class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Copywriting">
+              <div class="col-1"><i class="bx bx-highlight bx-sm"></i></div>
+              <div id="detailCopywriting" class="col align-self-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat aspernatur eligendi
+                beatae maxime est adipisci rerum ut perferendis, illo molestiae, architecto aut, quibusdam sed.
+                Officiis magnam cum error molestiae esse!</div>
+            </div>
+            <div id="detailRevisionContainer" class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Revisi">
+              <div class="col-1"><i class="bx bx-revision bx-sm"></i></div>
+              <div id="detailRevision" class="col align-self-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, velit! Enim velit
+                blanditiis maxime. Exercitationem, voluptate illum, sapiente minus repellendus fuga repudiandae, nobis
+                molestiae voluptates explicabo quis dolore quos vero?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal View Konten -->
+<!-- <div class="modal fade" id="viewKontenModal" tabindex="-1" aria-labelledby="kontenModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -84,4 +145,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->

@@ -28,8 +28,8 @@ $_SESSION['team_id'] = 1;
   <link rel="shortcut icon" href="assets/images/favicon.png">
   <!-- Boostrap 4.6-->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <!-- Icon Fontawesome -->
-  <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+  <!-- Icon BoxIcons -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <!-- Fullcalendar libary -->
   <link rel='stylesheet' href='assets/css/fullcalendar.min.css' />
   <script src='assets/js/jquery.min.js'></script>

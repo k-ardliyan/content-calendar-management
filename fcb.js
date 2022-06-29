@@ -1,3 +1,7 @@
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 // Tambah Kategori
 $('#addKategori').submit(function (e) {
   e.preventDefault();

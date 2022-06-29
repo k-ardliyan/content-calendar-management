@@ -22,21 +22,44 @@ $(document).ready(function () {
         },
         eventClick: function (event) {
             console.log(event);
-            $('input#detailNama').val(event.cc_name);
-            $('input#detailUrl').val(event.url);
-            $('textarea#detailContent').val(event.content);
-            $('textarea#detailCopywriting').val(event.copywriting);
-            $('select#detailStatus').append('<option selected value="' + event.status + '">' + event.status + '</option>');
-            $('select#detailPillar').append('<option selected value="' + event.cp_name + '">' + event.cp_name + '</option>');
-            $('input#detailTanggal').val(event.date);
-            $('input#detailJam').val(event.time);
-            if (event.status === 'Revision') {
-                $('textarea#detailRevisi').val(event.revision);
-                $('textarea#detailRevisi').removeClass('d-none');
-                $('label[for="detailRevisi"]').removeClass('d-none');
+            // Setting Waktu = getDay, getDate, getMonth, getFullYear
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            const date = new Date(event.date);
+            const day = days[date.getDay()];
+            const dateString = day + ', ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ' - ';
+            
+            // change time format to hh:mm
+            const time = event.time.split(':');
+            const timeString = time[0] + ':' + time[1];
+
+            $('#detailCategory').text(event.ccc_name + ' |');
+            $('#detailName').text(event.cc_name);
+            $('#detailUrl').text(event.url);
+            $('#detailContent').text(event.content);
+            $('#detailCopywriting').text(event.copywriting);
+            $('#detailStatus').text(event.status);
+            $('#detailStatus').css('background-color', event.color);
+            $('#detailPillar').text(event.pillar);
+            $('#detailDate').text(dateString);
+            $('#detailTime').text(timeString);
+            if(event.url == "" || event.url == null){
+                $('#detailUrlContainer').addClass('d-none');
             } else {
-                $('textarea#detailRevisi').addClass('d-none');
-                $('label[for="detailRevisi"]').addClass('d-none');
+                $('#detailUrlContainer').removeClass('d-none');
+            }
+            if (event.status === 'Revision') {
+                if (event.revision == '' || event.revision == null) {
+                    $('#detailRevision').text('Belum mengisi kolom revisi');
+                    $('#detailRevision').addClass('text-muted font-italic');
+                } else {
+                    $('#detailRevision').text(event.revision);
+                }
+                $('#detailRevision').removeClass('d-none');
+                $('#detailRevisionContainer').removeClass('d-none');
+            } else {
+                $('#detailRevision').addClass('d-none');
+                $('#detailRevisionContainer').addClass('d-none');
             }
             $('#viewKontenModal').modal();
         },
