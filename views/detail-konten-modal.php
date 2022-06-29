@@ -14,10 +14,10 @@
                 <button type="button" class="close ml-3" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="Tutup">
                   <span aria-hidden="true"><i class='bx bx-x'></i></span>
                 </button>
-                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Hapus" onclick="">
+                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Hapus" id="delKonten">
                   <span aria-hidden="true"><i class='bx bx-trash'></i></span>
                 </button>
-                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Ubah" onclick="">
+                <button type="button" class="close mx-2" data-toggle="tooltip" data-placement="bottom" title="Ubah" id="editKonten">
                   <span aria-hidden="true"><i class='bx bx-pencil'></i></span>
                 </button>
               </div>
@@ -38,7 +38,9 @@
             </div>
             <div id="detailUrlContainer" class="row align-items-end mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="URL">
               <div class="col-1"><i class="bx bx-link bx-sm"></i></div>
-              <div id="detailUrl" class="col align-self-center">www.google.com</div>
+              <div class="col align-self-center">
+                <a id="detailUrl" href="#" target="_blank">www.google.co.id</a>
+              </div>
             </div>
             <div class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Konten">
               <div class="col-1"><i class="bx bx-align-left bx-sm"></i></div>

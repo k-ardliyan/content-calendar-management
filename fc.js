@@ -35,7 +35,6 @@ $(document).ready(function () {
 
             $('#detailCategory').text(event.ccc_name + ' |');
             $('#detailName').text(event.cc_name);
-            $('#detailUrl').text(event.url);
             $('#detailContent').text(event.content);
             $('#detailCopywriting').text(event.copywriting);
             $('#detailStatus').text(event.status);
@@ -43,9 +42,11 @@ $(document).ready(function () {
             $('#detailPillar').text(event.pillar);
             $('#detailDate').text(dateString);
             $('#detailTime').text(timeString);
-            if(event.url == "" || event.url == null){
+            if(event.url_content == "" || event.url_content == null){
                 $('#detailUrlContainer').addClass('d-none');
             } else {
+                $('#detailUrl').text(event.url_content);
+                $('#detailUrl').attr('href', 'https://' + event.url_content);
                 $('#detailUrlContainer').removeClass('d-none');
             }
             if (event.status === 'Revision') {
@@ -61,6 +62,10 @@ $(document).ready(function () {
                 $('#detailRevision').addClass('d-none');
                 $('#detailRevisionContainer').addClass('d-none');
             }
+            // Delete Konten
+            $('#delKonten').attr('onclick', 'delKonten(' + event.id_calendar_content + ')');
+            // Edit
+            $('#editKonten').attr('onclick', 'editKonten(' + event.id_calendar_content + ')');
             $('#viewKontenModal').modal();
         },
     });

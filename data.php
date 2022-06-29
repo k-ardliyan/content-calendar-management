@@ -5,7 +5,7 @@
     $kategori = $_GET['kategori'];
 
     // query to get all data from calendar_contents table join to table teams with id
-    $result = $mysqli->query("SELECT * , cc.name as cc_name, t.name as team_name, cp.name as cp_name, ccc.name as ccc_name
+    $result = $mysqli->query("SELECT * , cc.id as id_cc, cc.name as cc_name, cc.url as url_content, t.name as team_name, cp.name as cp_name, ccc.name as ccc_name
                                     FROM calendar_contents cc 
                                     JOIN teams t ON cc.team_id = t.id 
                                     JOIN content_pillars cp ON cc.content_pillar_id = cp.id
@@ -13,6 +13,8 @@
                                     WHERE cc.calendar_content_category_id = $kategori");
 
     foreach ($result as $row) {
+        $row['id_calendar_content'] = $row['id_cc'];
+        $row['url'] = '';
         // switchcase
         switch ($row['status']) {
             case 'Plan':
@@ -38,7 +40,8 @@
                 break;
             default:
                 $row['color'] = "white";
-                break;}
+                break;
+        }
         // data calendar start and title
         $row['start'] = $row['date'] . "T" . $row['time'];
         $row['title'] = "\n" .$row['cc_name'] . "\n" . $row['team_name'];

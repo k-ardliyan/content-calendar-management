@@ -28,6 +28,8 @@ $_SESSION['team_id'] = 1;
   <link rel="shortcut icon" href="assets/images/favicon.png">
   <!-- Boostrap 4.6-->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <!-- Icon BoxIcons -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <!-- Fullcalendar libary -->
@@ -93,7 +95,7 @@ $_SESSION['team_id'] = 1;
   require_once 'views/add-konten-modal.php';
   require_once 'views/add-pillar-modal.php';
   require_once 'views/add-kategori-modal.php'; 
-  // require_once 'views/edit-konten-modal.php';
+  require_once 'views/edit-konten-modal.php';
   require_once 'views/edit-pillar-modal.php';
   require_once 'views/edit-kategori-modal.php';
   require_once 'views/detail-konten-modal.php';

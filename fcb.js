@@ -261,7 +261,12 @@ var dataPillar = function () {
 }
 
 // Load Data Kategori di index
-$('#loadKategoriKalendar').on('change', function(e) {
+$('#loadKategoriKalendar').on('change', function (e) {
+  var load = $('#loadKategoriKalendar').val();
+  window.location.href = "?kategori=" + load;
+})
+
+$('button[aria-label="Close"]').click(function () {
   var load = $('#loadKategoriKalendar').val();
   window.location.href = "?kategori=" + load;
 })
@@ -318,8 +323,112 @@ $('#addKonten').submit(function (e) {
 
 // Hapus Konten
 var delKonten = function (id) {
-
+  // check condition delete or no with swal
+  Swal.fire({
+    title: 'Apakah Anda Yakin?',
+    text: "Konten ini akan dihapus!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, Hapus!'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: 'del-konten.php',
+        type: 'POST',
+        data: {
+          delKonten: id
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Sukses',
+              text: 'Konten Dihapus',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#viewKontenModal').modal('hide');
+          } else {
+            alert(data.message);
+          }
+        }
+      })
+    }
+  })
 }
 
 // Edit Konten
-var editKonten = function (){}
+var editKonten = function (id) {
+  var timerInterval
+  Swal.fire({
+    title: 'Loading',
+    timer: 500,
+    timerProgressBar: true,
+    didOpen: () => {
+      Swal.showLoading()
+      const b = Swal.getHtmlContainer().querySelector('b')
+      timerInterval = setInterval(() => {}, 100)
+    },
+    willClose: () => {
+      clearInterval(timerInterval)
+    }
+  })
+  setTimeout(() => {
+    $('#viewKontenModal').modal('hide');
+    $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
+    $('input#idKonten').val(id);
+  }, 500);
+  $('#editKontenForm').submit(function (e) {
+    e.preventDefault();
+    var id = $('#idKonten').val();
+    var nama = $('#updateNama').val();
+    var url = $('#updateUrl').val();
+    var content = $('#updateContent').val();
+    var copywriting = $('#updateCopywriting').val();
+    var status = $('#updateStatus').val();
+    var tanggal = $('#updateTanggal').val();
+    var jam = $('#updateJam').val();
+    var revisi = $('#updateRevisi').val();
+    var pillar = $('#updatePillar').val();
+    var team = $('#updateTeam').val();
+    var kategori = window.location.search.split('=')[1];
+    $.ajax({
+      url: 'edit-konten.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        idKonten: id,
+        inputNama: nama,
+        inputUrl: url,
+        inputContent: content,
+        inputCopywriting: copywriting,
+        selectStatus: status,
+        inputTanggal: tanggal,
+        inputJam: jam,
+        inputRevisi: revisi,
+        selectPillar: pillar,
+        inputTeam: team,
+        inputKategori: kategori,
+      },
+      success: function (data) {
+        if (data.status == 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Sukses',
+            text: 'Konten Telah Diubah',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          $('#kontenEditModal').modal('hide');
+          $('#calendar').fullCalendar('refetchEvents');
+        } else {
+          console.log(data);
+        }
+      }
+    })
+  })
+}

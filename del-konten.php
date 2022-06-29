@@ -2,7 +2,7 @@
 
 require_once 'db.php';
 
-$id = isset($_POST['delPillar']) ? $_POST['delPillar'] : null;
+$id = isset($_POST['delKonten']) ? $_POST['delKonten'] : null;
 
 $result = $mysqli->query("DELETE FROM calendar_contents
                         WHERE id = '$id'");

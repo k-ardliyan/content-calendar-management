@@ -17,7 +17,12 @@
                   placeholder="ex: Facebook, Instagram">
               </div>
               <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-success w-100"><i class="fa fa-plus"></i> Add</button>
+                <button type="submit" class="btn btn-success w-100">
+                  <span class="d-flex align-items-center">
+                    <i class="bx bx-plus"></i>
+                    <span class="ml-2">Tambah</span>
+                  </span>
+                </button>
               </div>
             </div>
           </form>

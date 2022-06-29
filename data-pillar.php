@@ -20,8 +20,8 @@
             <td><?= $no; ?></td>
             <td><?= $row['name']; ?></td>
             <td>
-                <button type="button" class="btn btn-warning btn-sm text-white mr-2" onclick="editPillar(<?= $row['id'] ?>,'<?= $row['name']; ?>')"><i class="fa fa-edit"></i></button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="delPillar(<?= $row['id']; ?>)"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-warning btn-sm text-white mr-2" onclick="editPillar(<?= $row['id'] ?>,'<?= $row['name']; ?>')"><i class="bx bx-pencil"></i></button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="delPillar(<?= $row['id']; ?>)"><i class="bx bx-trash"></i></button>
             </td>
         </tr>
         <?php $no++; endwhile ?>
