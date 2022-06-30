@@ -22,39 +22,53 @@ $(document).ready(function () {
         },
         eventClick: function (event) {
             console.log(event);
+            // Init Variable
+            const id = event.id_calendar_content;
+            const category = event.ccc_name;
+            const name = event.cc_name;
+            const content = event.content;
+            const copywriting = event.copywriting;
+            const status = event.status;
+            const pillar = event.cp_name;
+            const color = event.color;
+            const url = event.url_konten;
+            const revision = event.revision;
+            const tgl = event.date;
+            const jam = event.time;
+
             // Setting Waktu = getDay, getDate, getMonth, getFullYear
             const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
             const date = new Date(event.date);
             const day = days[date.getDay()];
             const dateString = day + ', ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ' - ';
-            
+
             // change time format to hh:mm
             const time = event.time.split(':');
             const timeString = time[0] + ':' + time[1];
 
-            $('#detailCategory').text(event.ccc_name + ' |');
-            $('#detailName').text(event.cc_name);
-            $('#detailContent').text(event.content);
-            $('#detailCopywriting').text(event.copywriting);
-            $('#detailStatus').text(event.status);
-            $('#detailStatus').css('background-color', event.color);
-            $('#detailPillar').text(event.pillar);
+            $('#detailCategory').text(category + ' |');
+            $('#detailName').text(name);
+            $('#detailContent').text(content);
+            $('#detailCopywriting').text(copywriting);
+            $('#detailStatus').text(status);
+            $('#detailStatus').css('background-color', color);
+            $('#detailPillar').text(pillar);
             $('#detailDate').text(dateString);
             $('#detailTime').text(timeString);
-            if(event.url_content == "" || event.url_content == null){
+            if (url == "" || url == null) {
                 $('#detailUrlContainer').addClass('d-none');
             } else {
-                $('#detailUrl').text(event.url_content);
-                $('#detailUrl').attr('href', 'https://' + event.url_content);
+                $('#detailUrl').text(url);
+                $('#detailUrl').attr('href', 'https://' + url);
                 $('#detailUrlContainer').removeClass('d-none');
             }
-            if (event.status === 'Revision') {
-                if (event.revision == '' || event.revision == null) {
+            if (status === 'Revision') {
+                if (revision == '' || revision == null) {
                     $('#detailRevision').text('Belum mengisi kolom revisi');
                     $('#detailRevision').addClass('text-muted font-italic');
                 } else {
-                    $('#detailRevision').text(event.revision);
+                    $('#detailRevision').text(revision);
                 }
                 $('#detailRevision').removeClass('d-none');
                 $('#detailRevisionContainer').removeClass('d-none');
@@ -63,9 +77,9 @@ $(document).ready(function () {
                 $('#detailRevisionContainer').addClass('d-none');
             }
             // Delete Konten
-            $('#delKonten').attr('onclick', 'delKonten(' + event.id_calendar_content + ')');
+            $('#delKonten').attr('onclick', 'delKonten(' + id + ')');
             // Edit
-            $('#editKonten').attr('onclick', 'editKonten(' + event.id_calendar_content + ')');
+            $('#editKonten').attr('onclick', 'editKonten(' + id + ',"' + name + '","' + url + '","' + content + '","' + copywriting + '","' + status + '","' + tgl + '","' + jam + '","' + revision + '","' + pillar + '")');
             $('#viewKontenModal').modal();
         },
     });

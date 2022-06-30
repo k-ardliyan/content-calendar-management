@@ -3,7 +3,6 @@
 require_once 'db.php';
 
 $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
-$resultData = $mysqli->query("SELECT * FROM calendar_contents WHERE id");
 
 ?>
 <!-- Modal Edit Konten -->
@@ -47,7 +46,6 @@ $resultData = $mysqli->query("SELECT * FROM calendar_contents WHERE id");
               <div class="form-group col-md-6">
                 <label for="updateStatus">Status</label>
                 <select name="updateStatus" id="updateStatus" class="form-control">
-                  <option selected>Pilih..</option>
                   <option value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>
                   <option value="Need Review" class="badge-need-review">Need Review</option>

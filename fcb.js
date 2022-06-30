@@ -362,7 +362,8 @@ var delKonten = function (id) {
 }
 
 // Edit Konten
-var editKonten = function (id) {
+var editKonten = function (id, nama, url, content, copywriting, status, tanggal, jam, revisi, pillar) {
+  // Loading Saat Klik Edit
   var timerInterval
   Swal.fire({
     title: 'Loading',
@@ -378,10 +379,20 @@ var editKonten = function (id) {
     }
   })
   setTimeout(() => {
+    $('#idKonten').val(id);
+    $('#updateNama').val(nama);
+    $('#updateUrl').val(url);
+    $('#updateContent').val(content);
+    $('#updateCopywriting').val(copywriting);
+    $('#updateStatus').val(status);
+    $('#updateTanggal').val(tanggal);
+    $('#updateJam').val(jam);
+    $('#updateRevisi').val(revisi);
+    $('#updatePillar').val(pillar); 
     $('#viewKontenModal').modal('hide');
     $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
-    $('input#idKonten').val(id);
   }, 500);
+  
   $('#editKontenForm').submit(function (e) {
     e.preventDefault();
     var id = $('#idKonten').val();
