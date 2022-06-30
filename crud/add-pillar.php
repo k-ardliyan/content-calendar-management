@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'db.php';
+require_once '../config/db.php';
 
 $pillar = isset($_POST['inputPillar']) ? $_POST['inputPillar'] : null;
 

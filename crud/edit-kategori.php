@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db.php';
+require_once '../config/db.php';
 
 $id = isset($_POST['idKategori']) ? $_POST['idKategori'] : null;
 $name = isset($_POST['nameKategori']) ? $_POST['nameKategori'] : null;

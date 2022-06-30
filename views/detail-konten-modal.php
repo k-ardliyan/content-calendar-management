@@ -28,7 +28,9 @@
                 <span id="detailCategory" data-toggle="tooltip" data-placement="top" title="Kategori">Facebook &#124;</span>
                 <span id="detailStatus" class="badge-info badge-pill" data-toggle="tooltip" data-placement="top"
                   title="Status">Plan</span>
-                <span data-toggle="tooltip" data-placement="top" title="Team">&#124; <i class="bx bx-user"></i> k-ardliyan</span>
+                <span data-toggle="tooltip" data-placement="top" title="Pillar">
+                  &#124; <i class="bx bx-category"></i>&nbsp;<span id="detailPillar"></span>
+                </span>
                 <h3 id="detailName" class="mb-0 mt-2">Judul Text</h3>
                 <div>
                   <span id="detailDate">Kamis, 30 Juni 2020 &#124;</span>

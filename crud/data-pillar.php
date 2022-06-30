@@ -9,7 +9,7 @@
     <tbody>
         <?php
         
-        require_once 'db.php';
+        require_once '../config/db.php';
         $result = $mysqli->query("SELECT * FROM content_pillars WHERE id");
         $no=1;
         while($row = mysqli_fetch_array($result)): 

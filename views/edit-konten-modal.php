@@ -1,10 +1,3 @@
-<?php 
-
-require_once 'db.php';
-
-$resultPillar = $mysqli->query("SELECT * FROM content_pillars");
-
-?>
 <!-- Modal Edit Konten -->
 <div class="modal fade" id="kontenEditModal" tabindex="-1"
     aria-labelledby="kontenEditModalLabel" aria-hidden="true">
@@ -56,11 +49,9 @@ $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="updatePillar">Pillar</label>
-                <select name="updatePillar" id="updatePillar" class="form-control">
-                  <?php foreach($resultPillar as $row): ?>
-                  <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-                  <?php endforeach; ?>
+                <label for="updatePillarContent">Pillar</label>
+                <select name="updatePillarContent" id="updatePillarContent" class="form-control">
+                  <!-- Data Pillar -->
                 </select>
               </div>
             </div>
@@ -74,9 +65,9 @@ $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
                 <input type="time" name="updateJam" id="updateJam" class="form-control">
               </div>
             </div>
-            <div class="form-group d-none">
+            <div id="updateRevisiContainer" class="form-group d-none">
               <label for="updateRevisi">Revisi</label>
-              <textarea name="updateResivi" id="updateRevisi" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="updateRevisi" id="updateRevisi" cols="30" rows="5" class="form-control"></textarea>
             </div>
           
         </div>

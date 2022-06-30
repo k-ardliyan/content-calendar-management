@@ -1,10 +1,3 @@
-<?php 
-
-require_once 'db.php';
-
-$resultPillar = $mysqli->query("SELECT * FROM content_pillars");
-
-?>
 
 <!-- Modal Add Konten -->
 <div class="modal fade" id="kontenModal"  tabindex="-1"
@@ -43,7 +36,6 @@ $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
               <div class="form-group col-md-6">
                 <label for="selectStatus">Status</label>
                 <select name="selectStatus" id="selectStatus" class="form-control">
-                  <option selected>Pilih..</option>
                   <option value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>
                   <option value="Need Review" class="badge-need-review">Need Review</option>
@@ -56,9 +48,7 @@ $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
               <div class="form-group col-md-6">
                 <label for="selectPillar">Pillar</label>
                 <select name="selectPillar" id="selectPillar" class="form-control">
-                  <?php foreach($resultPillar as $row): ?>
-                  <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-                  <?php endforeach; ?>
+                  <!-- Data Pillar -->
                 </select>
               </div>
             </div>
@@ -72,7 +62,7 @@ $resultPillar = $mysqli->query("SELECT * FROM content_pillars");
                 <input type="time" name="inputJam" id="inputJam" class="form-control">
               </div>
             </div>
-            <div class="form-group d-none">
+            <div id="inputRevisiContainer" class="form-group d-none">
               <label for="inputRevisi">Revisi</label>
               <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control"></textarea>
             </div>

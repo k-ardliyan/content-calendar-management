@@ -1,5 +1,26 @@
+// Memnculkan tooltip di view modal konten
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Show/Hide Textarea Revisi di Add Konten
+$('#selectStatus').change(function () {
+  var status = $('#selectStatus').val();
+  if (status == 'Revision') {
+    $('#inputRevisiContainer').removeClass('d-none');
+  } else {
+    $('#inputRevisiContainer').addClass('d-none');
+  }
+})
+
+// Show/Hide Textarea Revisi di Edit Konten
+$('#updateStatus').change(function () {
+  var status = $('#updateStatus').val();
+  if (status == 'Revision') {
+    $('#updateRevisiContainer').removeClass('d-none');
+  } else {
+    $('#updateRevisiContainer').addClass('d-none');
+  }
 })
 
 // Tambah Kategori
@@ -7,7 +28,7 @@ $('#addKategori').submit(function (e) {
   e.preventDefault();
   var kategori = $('#inputKategori').val();
   $.ajax({
-    url: 'add-kategori.php',
+    url: 'crud/add-kategori.php',
     type: 'POST',
     data: {
       inputKategori: kategori
@@ -61,7 +82,7 @@ var editKategori = function (id, name) {
     var id = $('#idKategori').val();
     var kategori = $('#updateKategori').val();
     $.ajax({
-      url: 'edit-kategori.php',
+      url: 'crud/edit-kategori.php',
       type: 'POST',
       dataType: 'json',
       data: {
@@ -94,7 +115,7 @@ var editKategori = function (id, name) {
 // Hapus Kategori
 var delKategori = function (id) {
   $.ajax({
-    url: 'del-kategori.php',
+    url: 'crud/del-kategori.php',
     type: 'POST',
     data: {
       delKategori: id
@@ -121,7 +142,7 @@ var delKategori = function (id) {
 // Refresh Data Kategori
 var dataKategori = function () {
   $.ajax({
-    url: 'data-kategori.php',
+    url: 'crud/data-kategori.php',
     type: 'GET',
     success: function (data) {
       $('#dataKategori').html(data);
@@ -137,7 +158,7 @@ $('#addPillar').submit(function (e) {
   e.preventDefault();
   var pillar = $('#inputPillar').val();
   $.ajax({
-    url: 'add-pillar.php',
+    url: 'crud/add-pillar.php',
     type: 'POST',
     data: {
       inputPillar: pillar
@@ -164,7 +185,7 @@ $('#addPillar').submit(function (e) {
 // Hapus Pillar
 var delPillar = function (id) {
   $.ajax({
-    url: 'del-pillar.php',
+    url: 'crud/del-pillar.php',
     type: 'POST',
     data: {
       delPillar: id
@@ -216,7 +237,7 @@ var editPillar = function (id, name) {
     var id = $('#idPillar').val();
     var pillar = $('#updatePillar').val();
     $.ajax({
-      url: 'edit-pillar.php',
+      url: 'crud/edit-pillar.php',
       type: 'POST',
       dataType: 'json',
       data: {
@@ -249,7 +270,7 @@ var editPillar = function (id, name) {
 // Refresh Data Pillar
 var dataPillar = function () {
   $.ajax({
-    url: 'data-pillar.php',
+    url: 'crud/data-pillar.php',
     type: 'GET',
     success: function (data) {
       $('#dataPillar').html(data);
@@ -260,16 +281,29 @@ var dataPillar = function () {
   });
 }
 
-// Load Data Kategori di index
+// Refresh Halaman Setelah Memilih Kategori
 $('#loadKategoriKalendar').on('change', function (e) {
   var load = $('#loadKategoriKalendar').val();
   window.location.href = "?kategori=" + load;
 })
 
-$('button[aria-label="Close"]').click(function () {
+// Refresh Halaman Menutup Modal Kategori
+$('#refreshCategory').click(function () {
   var load = $('#loadKategoriKalendar').val();
   window.location.href = "?kategori=" + load;
 })
+
+// Load Data Pillar di Add/Edit Modal Konten
+var checkDataPillar = () => {
+  $.ajax({
+    url: 'crud/data-pillar-konten.php',
+    type: 'GET',
+    success: function (data) {
+      $('#selectPillar').html(data);
+      $('#updatePillarContent').html(data);
+    }
+  })
+}
 
 // Tambah Konten
 $('#addKonten').submit(function (e) {
@@ -287,7 +321,7 @@ $('#addKonten').submit(function (e) {
   var kategori = window.location.search.split('=')[1];
   var team = $('#inputTeam').val();
   $.ajax({
-    url: 'add-konten.php',
+    url: 'crud/add-konten.php',
     type: 'POST',
     data: {
       inputNama: nama,
@@ -313,6 +347,8 @@ $('#addKonten').submit(function (e) {
           timer: 1500
         })
         $('#kontenModal').modal('hide');
+        // reset form
+        $('form').trigger('reset');
         $('#calendar').fullCalendar('refetchEvents');
       } else {
         console.log(data);
@@ -335,7 +371,7 @@ var delKonten = function (id) {
   }).then((result) => {
     if (result.value) {
       $.ajax({
-        url: 'del-konten.php',
+        url: 'crud/del-konten.php',
         type: 'POST',
         data: {
           delKonten: id
@@ -363,6 +399,12 @@ var delKonten = function (id) {
 
 // Edit Konten
 var editKonten = function (id, nama, url, content, copywriting, status, tanggal, jam, revisi, pillar) {
+  checkDataPillar();
+  if(status == 'Revision') {
+    $('#updateRevisiContainer').removeClass('d-none');
+  } else {
+    $('#updateRevisiContainer').addClass('d-none');
+  }
   // Loading Saat Klik Edit
   var timerInterval
   Swal.fire({
@@ -388,7 +430,7 @@ var editKonten = function (id, nama, url, content, copywriting, status, tanggal,
     $('#updateTanggal').val(tanggal);
     $('#updateJam').val(jam);
     $('#updateRevisi').val(revisi);
-    $('#updatePillar').val(pillar); 
+    $('#updatePillarContent').val(pillar);  
     $('#viewKontenModal').modal('hide');
     $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
   }, 500);
@@ -404,11 +446,11 @@ var editKonten = function (id, nama, url, content, copywriting, status, tanggal,
     var tanggal = $('#updateTanggal').val();
     var jam = $('#updateJam').val();
     var revisi = $('#updateRevisi').val();
-    var pillar = $('#updatePillar').val();
+    var pillar = $('#updatePillarContent').val();
     var team = $('#updateTeam').val();
     var kategori = window.location.search.split('=')[1];
     $.ajax({
-      url: 'edit-konten.php',
+      url: 'crud/edit-konten.php',
       type: 'POST',
       dataType: 'json',
       data: {

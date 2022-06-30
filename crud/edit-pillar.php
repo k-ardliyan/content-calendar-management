@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'db.php';
+require_once '../config/db.php';
 
 $id = isset($_POST['idPillar']) ? $_POST['idPillar'] : null;
 $name = isset($_POST['namePillar']) ? $_POST['namePillar'] : null;

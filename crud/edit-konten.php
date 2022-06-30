@@ -1,8 +1,8 @@
 <?php
 
-require_once 'db.php';
-session_start();
+require_once '../config/db.php';
 
+$id = isset($_POST['idKonten']) ? $_POST['idKonten'] : '';
 $nama = isset($_POST['inputNama']) ? $_POST['inputNama'] : '';
 $url = isset($_POST['inputUrl']) ? $_POST['inputUrl'] : '';
 $content = isset($_POST['inputContent']) ? $_POST['inputContent'] : '';
@@ -15,8 +15,9 @@ $pillar = isset($_POST['selectPillar']) ? $_POST['selectPillar'] : '';
 $team = isset($_POST['inputTeam']) ? $_POST['inputTeam'] : '';
 $kategori = isset($_POST['inputKategori']) ? $_POST['inputKategori'] : '';
 
-$result = $mysqli->query("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, revision, content_pillar_id, team_id, calendar_content_category_id) VALUES ('$nama', '$url', '$content', '$copywriting', '$status', '$tanggal', '$jam', '$revisi', '$pillar', '$team', '$kategori')");
-
+$result = $mysqli->query("UPDATE calendar_contents 
+                                SET name = '$nama', url = '$url', content = '$content', copywriting = '$copywriting', status = '$status', date = '$tanggal', time = '$jam', revision = '$revisi', content_pillar_id = '$pillar', team_id = '$team', calendar_content_category_id = '$kategori' 
+                                WHERE id = '$id'");
 if ($result) {
     $status = 200;
     $message = "Success";

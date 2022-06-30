@@ -1,6 +1,6 @@
 <?php 
   
-require_once 'db.php';
+require_once 'config/db.php';
 
 $result = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
 $resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
@@ -11,8 +11,6 @@ foreach ($resultKategori as $row) {
 
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
 
-
-session_start();
 $_SESSION['team_id'] = 1;
 
 ?>
@@ -66,7 +64,7 @@ $_SESSION['team_id'] = 1;
             </select>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kontenModal">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kontenModal" onclick="checkDataPillar()">
               <i class="bi-plus"></i>Konten
             </button>
           </li>
@@ -104,7 +102,7 @@ $_SESSION['team_id'] = 1;
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <!-- Add Swal -->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="fcb.js"></script>
 </body>
 
