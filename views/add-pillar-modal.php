@@ -14,7 +14,7 @@
             <div class="form-row">
               <div class="form-group col-md-9">
                 <input type="text" name="inputPillar" id="inputPillar" class="form-control"
-                  placeholder="ex: News, Meme">
+                  placeholder="ex: News, Meme" required>
               </div>
               <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-success w-100">

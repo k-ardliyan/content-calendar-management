@@ -14,7 +14,7 @@
             <div class="form-row">
               <div class="form-group col-md-9">
                 <input type="text" name="inputKategori" id="inputKategori" class="form-control"
-                  placeholder="ex: Facebook, Instagram">
+                  placeholder="ex: Facebook, Instagram" required>
               </div>
               <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-success w-100">

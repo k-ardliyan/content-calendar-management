@@ -15,7 +15,7 @@
             <input type="hidden" name="inputTeam" id="inputTeam" value="<?= $_SESSION['team_id']  ?>">
             <div class="form-group">
               <label for="inputNama">Nama</label>
-              <input type="text" class="form-control" id="inputNama" placeholder="ex: Membuat Konten Bootcamp">
+              <input type="text" class="form-control" id="inputNama" placeholder="ex: Membuat Konten Bootcamp" required>
             </div>
             <div class="form-group">
               <label for="inputUrl">URL</label>

@@ -15,7 +15,7 @@
               <div class="form-group col-md-9">
                 <input type="hidden" name="idKategori" id="idKategori">
                 <input type="text" name="updateKategori" id="updateKategori" class="form-control"
-                  placeholder="ex: Facebook, Instagram">
+                  placeholder="ex: Facebook, Instagram" required>
               </div>
               <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-info w-100"><i class="fa fa-save"></i> Save</button>

@@ -1,3 +1,32 @@
+// Set Default Date
+var setDefaultDate = function () {
+  var date = new Date();
+  // day and month with leading zeros
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+  var date = year + '-' + month + '-' + day;
+  $('#inputTanggal').val(date);
+}
+
+// Set Default Time
+var setDefaultTime = () => {
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  var time = hours + ':' + minutes;
+  $('#inputJam').val(time);
+}
+
 // Memnculkan tooltip di view modal konten
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -281,8 +310,19 @@ var dataPillar = function () {
   });
 }
 
+// Check Parameter URL Found ?kategori or not, if not pushState to ?kategori
+var checkURL = function () {
+  var url = window.location.href;
+  var urlSplit = url.split('?');
+  var idCategory = $('#loadKategoriKalendar').val()
+  if (urlSplit[1] == undefined) {
+    window.history.pushState('', '', '?kategori=' + idCategory);
+  }
+}
+
 // Refresh Halaman Setelah Memilih Kategori
 var checkDataCategory = () => {
+  checkURL();
   $.ajax({
     url: 'crud/data-kategori-kalender.php',
     type: 'GET',
@@ -292,20 +332,24 @@ var checkDataCategory = () => {
       var url = new URL(window.location.href);
       var searchParams = new URLSearchParams(url.search);
       var kategori = searchParams.get('kategori');
+      $('#loadKategoriKalendar').val(kategori);
       if (kategori) {
-        $('#loadKategoriKalendar').val(kategori);
         $('#loadKategoriKalendar').on('change', function (e) {
           var load = $('#loadKategoriKalendar').val();
           window.location.href = "?kategori=" + load;
+          // window.history.pushState('', '', '?kategori=' + load); // Masih belum nemu caranya
+          $('#calendar').fullCalendar('refetchEvents');
         });
       }
-      $('#calendar').fullCalendar('refetchEvents');
     }
   })
 }
 
 // Load Data Pillar di Add/Edit Modal Konten
 var checkDataPillar = () => {
+  checkURL();
+  setDefaultDate();
+  setDefaultTime();
   $.ajax({
     url: 'crud/data-pillar-konten.php',
     type: 'GET',

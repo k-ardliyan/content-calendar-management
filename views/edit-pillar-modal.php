@@ -15,7 +15,7 @@
               <div class="form-group col-md-9">
                 <input type="hidden" name="idPillar" id="idPillar">
                 <input type="text" name="updatePillar" id="updatePillar" class="form-control"
-                placeholder="ex: News, Meme">
+                placeholder="ex: News, Meme" required>
               </div>
               <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-info w-100"><i class="fa fa-save"></i> Save</button>
