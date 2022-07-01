@@ -12,7 +12,13 @@ $(document).ready(function () {
         events: {
             url: 'crud/data.php?kategori=' + $('#loadKategoriKalendar').val(),
         },
+        eventRender: function(event, element){
+            if(event.icon) {
+                element.find('.fc-title').prepend("<br/><i class='fa fa-" + event.icon + "'></i> ");
+            }
+        },
         eventClick: function (event) {
+            console.log(event);
             // Init Variable
             const id = event.id_calendar_content;
             const category = event.ccc_name;

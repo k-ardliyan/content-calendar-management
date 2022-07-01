@@ -44,7 +44,8 @@ require_once '../config/db.php';
         }
         // data calendar start and title
         $row['start'] = $row['date'] . "T" . $row['time'];
-        $row['title'] = "\n" .$row['cc_name'] . "\n" . $row['team_name'];
+        $row['title'] = " " . $row['team_name'] . "\n" .$row['cc_name'];
+        $row['icon'] = "user";
         $row['kategori'] = $row['ccc_name'];
         $data[] = $row;
     }
