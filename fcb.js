@@ -282,16 +282,27 @@ var dataPillar = function () {
 }
 
 // Refresh Halaman Setelah Memilih Kategori
-$('#loadKategoriKalendar').on('change', function (e) {
-  var load = $('#loadKategoriKalendar').val();
-  window.location.href = "?kategori=" + load;
-})
-
-// Refresh Halaman Menutup Modal Kategori
-$('#refreshCategory').click(function () {
-  var load = $('#loadKategoriKalendar').val();
-  window.location.href = "?kategori=" + load;
-})
+var checkDataCategory = () => {
+  $.ajax({
+    url: 'crud/data-kategori-kalender.php',
+    type: 'GET',
+    success: function (data) {
+      $('#loadKategoriKalendar').html(data);
+      // Search Paramater URL
+      var url = new URL(window.location.href);
+      var searchParams = new URLSearchParams(url.search);
+      var kategori = searchParams.get('kategori');
+      if (kategori) {
+        $('#loadKategoriKalendar').val(kategori);
+        $('#loadKategoriKalendar').on('change', function (e) {
+          var load = $('#loadKategoriKalendar').val();
+          window.location.href = "?kategori=" + load;
+        });
+      }
+      $('#calendar').fullCalendar('refetchEvents');
+    }
+  })
+}
 
 // Load Data Pillar di Add/Edit Modal Konten
 var checkDataPillar = () => {

@@ -57,7 +57,8 @@ $_SESSION['team_id'] = 1;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto align-items-center" style="grid-gap: 12px;">
           <li class="nav-item active">
-            <select class="form-select nav-link" id="loadKategoriKalendar" onselect="loadKategoriKalendar()">
+            <select class="form-select nav-link" id="loadKategoriKalendar" onclick="checkDataCategory()">
+            <!-- loadKategoriKalendar -->
               <?php foreach($resultKategori as $row): ?>
               <option value="<?= $row['id'] ?>" <?= $row['id'] == $kategori ? 'selected':'' ?> ><?= $row['name']?></option>
               <?php endforeach ?>
