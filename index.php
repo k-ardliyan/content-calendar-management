@@ -37,6 +37,10 @@ $_SESSION['team_id'] = 1;
   <script src='assets/js/fullcalendar.min.js'></script>
   <!-- Locate Indonesia -->
   <script src='assets/js/id.js'></script>
+  <script>
+    // variable global untuk menyimpan data konten
+    const _events = {};
+  </script>
   <script src="fc.js"></script>
   <!-- DataTables -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
@@ -45,7 +49,7 @@ $_SESSION['team_id'] = 1;
   <title>Content Calendar Management</title>
 </head>
 <body>
-  <div class="container">
+  <div class="">
     <!-- Menu Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand" href="#">Calendar Management</a>
@@ -83,9 +87,11 @@ $_SESSION['team_id'] = 1;
       </div>
     </nav>
     <!-- Kalender -->
-    <div id="calendar"></div>
+    <div class="px-3">
+      <div id="calendar"></div>
+    </div>
     <!-- Footer -->
-    <footer class="text-muted text-center pt-3">Created by k-ardliyan | Powered by Gamelab Indonesia</footer>
+    <footer class="text-muted text-center pt-3 px-3">Created by k-ardliyan | Powered by Gamelab Indonesia</footer>
   </div>
 
   <!-- All Modals -->
@@ -105,6 +111,7 @@ $_SESSION['team_id'] = 1;
   <!-- Add Swal -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="fcb.js"></script>
+
 </body>
 
 </html>

@@ -1,14 +1,18 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
+        height: 550,
+        defaultView: 'month',
+        fixedWeekCount: false,
         header: {
             left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek'
+            center: 'hide',
+            right: 'title'
         },
         themeSystem: 'bootstrap4',
         timeFormat: 'H:mm',
-        navLinks: true, // can click day/week names to navigate views
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true,
+        eventLimitText: "konten lainnya",
+        views: {month:{eventLimit: 2}},
         events: {
             url: 'crud/data.php?kategori=' + $('#loadKategoriKalendar').val(),
         },
@@ -18,7 +22,8 @@ $(document).ready(function () {
             }
         },
         eventClick: function (event) {
-            console.log(event);
+            _event = event;
+            console.log(_event);
             // Init Variable
             const id = event.id_calendar_content;
             const category = event.ccc_name;
@@ -26,13 +31,10 @@ $(document).ready(function () {
             const content = event.content;
             const copywriting = event.copywriting;
             const status = event.status;
-            const pillar = event.content_pillar_id;
             const pillarName = event.cp_name;
             const color = event.color;
             const url = event.url_content;
             const revision = event.revision;
-            const tgl = event.date;
-            const jam = event.time;
 
             // Setting Waktu = getDay, getDate, getMonth, getFullYear
             const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -68,8 +70,8 @@ $(document).ready(function () {
             // Status Revisi atau Tidak
             if (status === 'Revision') {
                 if (revision == '' || revision == null) {
-                    $('#detailRevision').text('Belum mengisi kolom revisi');
-                    $('#detailRevision').addClass('text-muted font-italic');
+                    $('#detailRevision').text('Segera melakukan revisi konten');
+                    $('#detailRevision').addClass('text-danger font-italic');
                 } else {
                     $('#detailRevision').text(revision);
                 }
@@ -82,19 +84,18 @@ $(document).ready(function () {
 
             // Cek Pernah Menulis Revisi
             if (revision != '' && revision != null) {
-                $('#detailRevision').text(revision);
-                $('#detailRevision').removeClass('d-none');
-                $('#detailRevisionContainer').removeClass('d-none');
+                $('#detailRevision').removeClass('font-italic');
             }
 
             // Delete Konten
             $('#delKonten').attr('onclick', 'delKonten(' + id + ')');
 
             // Edit
-            $('#editKonten').attr('onclick', 'editKonten(' + id + ',"' + name + '","' + url + '","' + content + '","' + copywriting + '","' + status + '","' + tgl + '","' + jam + '","' + revision + '","' + pillar + '")');
+            $('#editKonten').attr('onclick', 'editKonten()');
 
             // Tampilan Modal
             $('#viewKontenModal').modal();
         },
     });
+    $('.fc-today-button').text('bulan ini');
 });

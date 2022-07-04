@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
               <label for="inputUrl">URL</label>
-              <input type="text" class="form-control" id="inputUrl">
+              <input type="text" class="form-control" id="inputUrl" placeholder="ex: www.gamelab.id">
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">

@@ -375,6 +375,13 @@ $('#addKonten').submit(function (e) {
   // get kategori from ?kategori=
   var kategori = window.location.search.split('=')[1];
   var team = $('#inputTeam').val();
+  // allow nama, content, copywriting use quotes
+  var nama = nama.replace(/'/g, "''");
+  var nama = nama.replace(/"/g, '""');
+  var content = content.replace(/'/g, "''");
+  var content = content.replace(/"/g, '""');
+  var copywriting = copywriting.replace(/'/g, "''");
+  var copywriting = copywriting.replace(/"/g, '""');
   $.ajax({
     url: 'crud/add-konten.php',
     type: 'POST',
@@ -453,9 +460,9 @@ var delKonten = function (id) {
 }
 
 // Edit Konten
-var editKonten = function (id, nama, url, content, copywriting, status, tanggal, jam, revisi, pillar) {
+var editKonten = function () {
   checkDataPillar();
-  if(status == 'Revision') {
+  if(_event.status == 'Revision') {
     $('#updateRevisiContainer').removeClass('d-none');
   } else {
     $('#updateRevisiContainer').addClass('d-none');
@@ -476,16 +483,16 @@ var editKonten = function (id, nama, url, content, copywriting, status, tanggal,
     }
   })
   setTimeout(() => {
-    $('#idKonten').val(id);
-    $('#updateNama').val(nama);
-    $('#updateUrl').val(url);
-    $('#updateContent').val(content);
-    $('#updateCopywriting').val(copywriting);
-    $('#updateStatus').val(status);
-    $('#updateTanggal').val(tanggal);
-    $('#updateJam').val(jam);
-    $('#updateRevisi').val(revisi);
-    $('#updatePillarContent').val(pillar);  
+    $('#idKonten').val(_event.id_calendar_content);
+    $('#updateNama').val(_event.cc_name);
+    $('#updateUrl').val(_event.url_content);
+    $('#updateContent').val(_event.content);
+    $('#updateCopywriting').val(_event.copywriting);
+    $('#updateStatus').val(_event.status);
+    $('#updateTanggal').val(_event.date);
+    $('#updateJam').val(_event.time);
+    $('#updateRevisi').val(_event.revision);
+    $('#updatePillarContent').val(_event.content_pillar_id);  
     $('#viewKontenModal').modal('hide');
     $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
   }, 500);
@@ -504,6 +511,13 @@ var editKonten = function (id, nama, url, content, copywriting, status, tanggal,
     var pillar = $('#updatePillarContent').val();
     var team = $('#updateTeam').val();
     var kategori = window.location.search.split('=')[1];
+    // allow nama, content, copywriting use quotes
+    var nama = nama.replace(/'/g, "''");
+    var nama = nama.replace(/"/g, '""');
+    var content = content.replace(/'/g, "''");
+    var content = content.replace(/"/g, '""');
+    var copywriting = copywriting.replace(/'/g, "''");
+    var copywriting = copywriting.replace(/"/g, '""');
     $.ajax({
       url: 'crud/edit-konten.php',
       type: 'POST',

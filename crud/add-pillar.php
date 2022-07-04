@@ -4,6 +4,10 @@ require_once '../config/db.php';
 
 $pillar = isset($_POST['inputPillar']) ? $_POST['inputPillar'] : null;
 
+// handle quote ' and "
+$pillar = str_replace('\'', '&#39;', $pillar);
+$pillar = str_replace('"', '&#34;', $pillar);
+
 $result = $mysqli->query("INSERT INTO content_pillars (name) VALUES ('$pillar')");
 
 if ($result) {
