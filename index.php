@@ -2,6 +2,14 @@
   
 require_once 'config/db.php';
 
+// $_SESSION['team_id'] = 1;
+session_start();
+
+// check teams already login or not
+if (!isset($_SESSION['team_id'])) {
+  header("Location: login.php");
+}
+
 $result = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
 $resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
 
@@ -11,7 +19,6 @@ foreach ($resultKategori as $row) {
 
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
 
-$_SESSION['team_id'] = 1;
 
 ?>
 
@@ -23,7 +30,7 @@ $_SESSION['team_id'] = 1;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Favicon -->
-  <link rel="shortcut icon" href="assets/images/favicon.png">
+  <link rel="shortcut icon" href="assets/images/logo.png">
   <!-- Boostrap 4.6-->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <!-- FontAwesome -->
@@ -82,6 +89,12 @@ $_SESSION['team_id'] = 1;
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
               <i class="bi-plus"></i>Kategori
             </button>
+          </li>
+          <li class="nav-item">
+            <form method="POST" action="config/auth.php">
+              <button type="submit" name="logout" value="logout" class="btn btn-danger">Logout
+              </button>
+            </form>
           </li>
           </li>
       </div>
