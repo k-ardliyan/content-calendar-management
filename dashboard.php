@@ -12,8 +12,8 @@
   <!-- CSS Libraries -->
 
   <!-- Template CSS -->
-  <link rel="stylesheet" href="../../assets/css/style-stisla.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/style-stisla.css">
+  <link rel="stylesheet" href="assets/css/components.css">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
               <div class="dropdown-list-content dropdown-list-message">
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../../assets/images/avatar/avatar-1.png" class="rounded-circle">
+                    <img alt="image" src="assets/images/avatar/avatar-1.png" class="rounded-circle">
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -50,7 +50,7 @@
                 </a>
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../../assets/images/avatar/avatar-2.png" class="rounded-circle">
+                    <img alt="image" src="assets/images/avatar/avatar-2.png" class="rounded-circle">
                   </div>
                   <div class="dropdown-item-desc">
                     <b>Dedik Sugiharto</b>
@@ -60,7 +60,7 @@
                 </a>
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../../assets/images/avatar/avatar-3.png" class="rounded-circle">
+                    <img alt="image" src="assets/images/avatar/avatar-3.png" class="rounded-circle">
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -71,7 +71,7 @@
                 </a>
                 <a href="#" class="dropdown-item">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../../assets/images/avatar/avatar-4.png" class="rounded-circle">
+                    <img alt="image" src="assets/images/avatar/avatar-4.png" class="rounded-circle">
                   </div>
                   <div class="dropdown-item-desc">
                     <b>Ardian Rahardiansyah</b>
@@ -81,7 +81,7 @@
                 </a>
                 <a href="#" class="dropdown-item">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="../../assets/images/avatar/avatar-5.png" class="rounded-circle">
+                    <img alt="image" src="assets/images/avatar/avatar-5.png" class="rounded-circle">
                   </div>
                   <div class="dropdown-item-desc">
                     <b>Alfa Zulkarnain</b>
@@ -157,7 +157,7 @@
           </li> -->
 
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
-            <img alt="image" src="../../assets/images/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <img alt="image" src="assets/images/avatar/avatar-1.png" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">Hi, Gamelab</div></a>
             <!-- <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
@@ -245,8 +245,8 @@
   <!-- JS Libraies -->
 
   <!-- Template JS File -->
-  <script src="../../assets/js/scripts.js"></script>
-  <script src="../../assets/js/custom.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
 </body>

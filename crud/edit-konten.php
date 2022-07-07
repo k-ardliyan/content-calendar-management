@@ -15,6 +15,8 @@ $pillar = isset($_POST['selectPillar']) ? $_POST['selectPillar'] : '';
 $team = isset($_POST['inputTeam']) ? $_POST['inputTeam'] : '';
 $kategori = isset($_POST['inputKategori']) ? $_POST['inputKategori'] : '';
 
+// check previous team add team edit
+
 $result = $mysqli->query("UPDATE calendar_contents 
                                 SET name = '$nama', url = '$url', content = '$content', copywriting = '$copywriting', status = '$status', date = '$tanggal', time = '$jam', revision = '$revisi', content_pillar_id = '$pillar', team_id = '$team', calendar_content_category_id = '$kategori' 
                                 WHERE id = '$id'");

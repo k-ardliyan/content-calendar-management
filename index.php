@@ -96,7 +96,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
               </button>
             </form>
           </li>
-          </li>
+        </ul>
       </div>
     </nav>
     <!-- Kalender -->

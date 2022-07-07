@@ -24,11 +24,11 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputContent">Content</label>
-                <textarea name="inputContent" id="inputContent" cols="28" rows="5" class="form-control"></textarea>
+                <textarea name="inputContent" id="inputContent" class="form-control" style="height: 140px !important;"></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="inputCopywriting">Copywriting</label>
-                <textarea name="inputCopywriting" id="inputCopywriting" cols="28" rows="5"
+                <textarea name="inputCopywriting" id="inputCopywriting" style="height: 140px !important;"
                   class="form-control"></textarea>
               </div>
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div id="inputRevisiContainer" class="form-group d-none">
               <label for="inputRevisi">Revisi</label>
-              <textarea name="inputResivi" id="inputRevisi" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="inputResivi" id="inputRevisi" class="form-control" style="height: 140px !important;"></textarea>
             </div>
           
         </div>

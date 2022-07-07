@@ -27,11 +27,11 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="updateContent">Content</label>
-                <textarea name="updateContent" id="updateContent" cols="28" rows="5" class="form-control"></textarea>
+                <textarea name="updateContent" id="updateContent" style="height: 140px !important;" class="form-control"></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="updateCopywriting">Copywriting</label>
-                <textarea name="updateCopywriting" id="updateCopywriting" cols="28" rows="5"
+                <textarea name="updateCopywriting" id="updateCopywriting" style="height: 140px !important;"
                   class="form-control"></textarea>
               </div>
             </div>
@@ -67,7 +67,7 @@
             </div>
             <div id="updateRevisiContainer" class="form-group d-none">
               <label for="updateRevisi">Revisi</label>
-              <textarea name="updateRevisi" id="updateRevisi" cols="30" rows="5" class="form-control"></textarea>
+              <textarea name="updateRevisi" id="updateRevisi" class="form-control"  style="height: 140px !important;"></textarea>
             </div>
           
         </div>

@@ -45,7 +45,10 @@ if ($login=='login'){
 		}
 	}
 	
-} else if ($logout=='logout'){
+} else if ($logout==true){
+	$status = 200;
+	$message = "Success Logout";
+	session_start();
 	session_destroy();
 	header("Location: ../login.php");
 }

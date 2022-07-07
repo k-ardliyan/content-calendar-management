@@ -1,14 +1,12 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-        height: 550,
-        defaultView: 'month',
-        fixedWeekCount: false,
         header: {
             left: 'prev,next today',
             center: 'hide',
             right: 'title'
         },
-        themeSystem: 'bootstrap4',
+        height: 250,
+        contentHeight:'auto',
         timeFormat: 'H:mm',
         eventLimit: true,
         eventLimitText: "konten lainnya",
