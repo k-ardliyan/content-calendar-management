@@ -105,13 +105,13 @@ if (isset($_SESSION['team_id'])) {
 					name: name,
 					email: email,
 					password: password,
-					register: 'register'
+					register: true
 				},
 				success: function(data) {
 					if (data.status == 200) {
 						toastr.success(data.message, 'Success', {
 							progressBar: true,
-							timeOut: 1500,
+							timeOut: 1000,
 							onHidden: function() {
 								window.location.href = 'login.php';
 							}
@@ -119,7 +119,7 @@ if (isset($_SESSION['team_id'])) {
 					} else {
 						toastr.error(data.message, 'Error', {
 							progressBar: true,
-							timeOut: 1500,
+							timeOut: 1000,
 						});
 					}
 				}

@@ -1,4 +1,7 @@
-// Set Default Date
+/**
+ * Set Defualt Date and Time
+ */
+
 var setDefaultDate = function () {
   var date = new Date();
   // day and month with leading zeros
@@ -15,10 +18,12 @@ var setDefaultDate = function () {
   $('#inputTanggal').val(date);
 }
 
-// Set Default Time
 var setDefaultTime = () => {
   var date = new Date();
   var hours = date.getHours();
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
   var minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = '0' + minutes;
@@ -27,7 +32,7 @@ var setDefaultTime = () => {
   $('#inputJam').val(time);
 }
 
-// Memnculkan tooltip di view modal konten
+// Memunculkan tooltip di view modal konten
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -52,37 +57,144 @@ $('#updateStatus').change(function () {
   }
 })
 
-// Tambah Kategori
+/**
+ * All Create Function
+ */
+
+// Add Categori
 $('#addKategori').submit(function (e) {
   e.preventDefault();
-  var kategori = $('#inputKategori').val();
   $.ajax({
-    url: 'crud/add-kategori.php',
+    url: 'crud/create.php',
     type: 'POST',
+    dataType: 'json',
     data: {
-      inputKategori: kategori
+      nameCategory: $('#inputKategori').val(),
+      addCategory: true
     },
-    success: function (data) {
-      data = JSON.parse(data);
-      if (data.status == 200) {
-        console.log(data);
+    success: function (response) {
+      if (response.status == 200) {
         Swal.fire({
           icon: 'success',
           title: 'Sukses',
-          text: 'Kategori Telah Ditambahkan',
+          text: response.message,
           showConfirmButton: false,
           timer: 1500
         })
         dataKategori();
         $('form').trigger('reset');
       } else {
-        console.log(data);
+        // swal.fire gives the error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     }
   });
 });
 
-// Edit Kategori
+// Tambah Pillar
+$('#addPillar').submit(function (e) {
+  e.preventDefault();
+  $.ajax({
+    url: 'crud/create.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      namePillar: $('#inputPillar').val(),
+      addPillar: true
+    },
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        dataPillar();
+        $('form').trigger('reset');
+      } else {
+        // swal.fire gives the error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    }
+  })
+})
+
+// Add Content
+$('#addKonten').submit(function (e) {
+  e.preventDefault();
+  var name = $('#inputNama').val();
+  var content = $('#inputContent').val();
+  var copywriting = $('#inputCopywriting').val();
+  // allow nama, content, copywriting use quotes
+  var name = name.replace(/'/g, "''");
+  var name = name.replace(/"/g, '""');
+  var content = content.replace(/'/g, "''");
+  var content = content.replace(/"/g, '""');
+  var copywriting = copywriting.replace(/'/g, "''");
+  var copywriting = copywriting.replace(/"/g, '""');
+  $.ajax({
+    url: 'crud/create.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      name: name,
+      url: $('#inputUrl').val(),
+      content: content,
+      copywriting: copywriting,
+      status: $('#selectStatus').val(),
+      date: $('#inputTanggal').val(),
+      time: $('#inputJam').val(),
+      revision: $('#inputRevisi').val(),
+      pillar: $('#selectPillar').val(),
+      team: $('#inputTeam').val(),
+      category: window.location.search.split('=')[1],
+      addContent: true
+    },
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        $('#kontenModal').modal('hide');
+        // reset form
+        $('form').trigger('reset');
+        $('#calendar').fullCalendar('refetchEvents');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    }
+  })
+})
+
+/**
+ * All Update Function
+ */
+
+// Update Category
 var editKategori = function (id, name) {
   var timerInterval
   Swal.fire({
@@ -108,18 +220,17 @@ var editKategori = function (id, name) {
   }, 500);
   $('#editKategori').submit(function (e) {
     e.preventDefault();
-    var id = $('#idKategori').val();
-    var kategori = $('#updateKategori').val();
     $.ajax({
-      url: 'crud/edit-kategori.php',
+      url: 'crud/update.php',
       type: 'POST',
       dataType: 'json',
       data: {
-        idKategori: id,
-        nameKategori: kategori,
+        idCategory: $('#idKategori').val(),
+        nameCategory: $('#updateKategori').val(),
+        updateCategory: true
       },
-      success: function (data) {
-        if (data.status == 200) {
+      success: function (response) {
+        if (response.status == 200) {
           setTimeout(() => {
             $('#kategoriEditModal').modal('hide');
             $('#kategoriModal').modal('show');
@@ -128,116 +239,26 @@ var editKategori = function (id, name) {
           Swal.fire({
             icon: 'success',
             title: 'Sukses',
-            text: 'Edit Kategori',
+            text: response.message,
             showConfirmButton: false,
             timer: 1000
           })
-          console.log(data);
         } else {
-          console.log(data);
+          // swal.fire gives the error message
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: response.message,
+            showConfirmButton: false,
+            timer: 1000
+          })
         }
       }
     });
   });
 };
 
-// Hapus Kategori
-var delKategori = function (id) {
-  $.ajax({
-    url: 'crud/del-kategori.php',
-    type: 'POST',
-    data: {
-      delKategori: id
-    },
-    success: function (data) {
-      data = JSON.parse(data);
-      if (data.status == 200) {
-        console.log(data);
-        Swal.fire({
-          icon: 'success',
-          title: 'Sukses',
-          text: 'Kategori Dihapus',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        dataKategori();
-      } else {
-        alert(data.message);
-      }
-    }
-  });
-}
-
-// Refresh Data Kategori
-var dataKategori = function () {
-  $.ajax({
-    url: 'crud/data-kategori.php',
-    type: 'GET',
-    success: function (data) {
-      $('#dataKategori').html(data);
-      $('#tableKategori').DataTable({
-        'pageLength': 4,
-      });
-    }
-  });
-}
-
-// Tambah Pillar
-$('#addPillar').submit(function (e) {
-  e.preventDefault();
-  var pillar = $('#inputPillar').val();
-  $.ajax({
-    url: 'crud/add-pillar.php',
-    type: 'POST',
-    data: {
-      inputPillar: pillar
-    },
-    dataType: 'json',
-    success: function (data) {
-      if (data.status == 200) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sukses',
-          text: 'Pillar Telah Ditambahkan',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        dataPillar();
-        $('form').trigger('reset');
-      } else {
-        console.log(data);
-      }
-    }
-  })
-})
-
-// Hapus Pillar
-var delPillar = function (id) {
-  $.ajax({
-    url: 'crud/del-pillar.php',
-    type: 'POST',
-    data: {
-      delPillar: id
-    },
-    dataType: 'json',
-    success: function (data) {
-      if (data.status == 200) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sukses',
-          text: 'Pillar Dihapus',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        dataPillar();
-      } else {
-        alert(data.message);
-      }
-    }
-  })
-}
-
-// Edit Pillar
+// Update Pillar
 var editPillar = function (id, name) {
   var timerInterval
   Swal.fire({
@@ -263,18 +284,17 @@ var editPillar = function (id, name) {
   }, 500);
   $('#editPillar').submit(function (e) {
     e.preventDefault();
-    var id = $('#idPillar').val();
-    var pillar = $('#updatePillar').val();
     $.ajax({
-      url: 'crud/edit-pillar.php',
+      url: 'crud/update.php',
       type: 'POST',
       dataType: 'json',
       data: {
-        idPillar: id,
-        namePillar: pillar,
+        idPillar: $('#idPillar').val(),
+        namePillar: $('#updatePillar').val(),
+        updatePillar: true
       },
-      success: function (data) {
-        if (data.status == 200) {
+      success: function (response) {
+        if (response.status == 200) {
           setTimeout(() => {
             $('#pillarModal').modal('show');
             $('#pillarEditModal').modal('hide');
@@ -283,183 +303,25 @@ var editPillar = function (id, name) {
           Swal.fire({
             icon: 'success',
             title: 'Sukses',
-            text: 'Edit Pillar',
+            text: response.message,
             showConfirmButton: false,
             timer: 1000
           })
-          console.log(data);
         } else {
-          console.log(data);
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: response.message,
+            showConfirmButton: false,
+            timer: 1000
+          })
         }
       }
     });
   })
 }
 
-// Refresh Data Pillar
-var dataPillar = function () {
-  $.ajax({
-    url: 'crud/data-pillar.php',
-    type: 'GET',
-    success: function (data) {
-      $('#dataPillar').html(data);
-      $('#tablePillar').DataTable({
-        'pageLength': 4,
-      });
-    }
-  });
-}
-
-// Check Parameter URL Found ?kategori or not, if not pushState to ?kategori
-var checkURL = function () {
-  var url = window.location.href;
-  var urlSplit = url.split('?');
-  var idCategory = $('#loadKategoriKalendar').val()
-  if (urlSplit[1] == undefined) {
-    window.history.pushState('', '', '?kategori=' + idCategory);
-  }
-}
-
-// Refresh Halaman Setelah Memilih Kategori
-var checkDataCategory = () => {
-  checkURL();
-  $.ajax({
-    url: 'crud/data-kategori-kalender.php',
-    type: 'GET',
-    success: function (data) {
-      $('#loadKategoriKalendar').html(data);
-      // Search Paramater URL
-      var url = new URL(window.location.href);
-      var searchParams = new URLSearchParams(url.search);
-      var kategori = searchParams.get('kategori');
-      $('#loadKategoriKalendar').val(kategori);
-      if (kategori) {
-        $('#loadKategoriKalendar').on('change', function (e) {
-          var load = $('#loadKategoriKalendar').val();
-          window.location.href = "?kategori=" + load;
-          // window.history.pushState('', '', '?kategori=' + load); // Masih belum nemu caranya
-          $('#calendar').fullCalendar('refetchEvents');
-        });
-      }
-    }
-  })
-}
-
-// Load Data Pillar di Add/Edit Modal Konten
-var checkDataPillar = () => {
-  checkURL();
-  setDefaultDate();
-  setDefaultTime();
-  $.ajax({
-    url: 'crud/data-pillar-konten.php',
-    type: 'GET',
-    success: function (data) {
-      $('#selectPillar').html(data);
-      $('#updatePillarContent').html(data);
-    }
-  })
-}
-
-// Tambah Konten
-$('#addKonten').submit(function (e) {
-  e.preventDefault();
-  var nama = $('#inputNama').val();
-  var url = $('#inputUrl').val();
-  var content = $('#inputContent').val();
-  var copywriting = $('#inputCopywriting').val();
-  var status = $('#selectStatus').val();
-  var tanggal = $('#inputTanggal').val();
-  var jam = $('#inputJam').val();
-  var revisi = $('#inputRevisi').val();
-  var pillar = $('#selectPillar').val();
-  // get kategori from ?kategori=
-  var kategori = window.location.search.split('=')[1];
-  var team = $('#inputTeam').val();
-  // allow nama, content, copywriting use quotes
-  var nama = nama.replace(/'/g, "''");
-  var nama = nama.replace(/"/g, '""');
-  var content = content.replace(/'/g, "''");
-  var content = content.replace(/"/g, '""');
-  var copywriting = copywriting.replace(/'/g, "''");
-  var copywriting = copywriting.replace(/"/g, '""');
-  $.ajax({
-    url: 'crud/add-konten.php',
-    type: 'POST',
-    data: {
-      inputNama: nama,
-      inputUrl: url,
-      inputContent: content,
-      inputCopywriting: copywriting,
-      selectStatus: status,
-      inputTanggal: tanggal,
-      inputJam: jam,
-      inputRevisi: revisi,
-      selectPillar: pillar,
-      inputTeam: team,
-      inputKategori: kategori,
-    },
-    dataType: 'json',
-    success: function (data) {
-      if (data.status == 200) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sukses',
-          text: 'Konten Telah Ditambahkan',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        $('#kontenModal').modal('hide');
-        // reset form
-        $('form').trigger('reset');
-        $('#calendar').fullCalendar('refetchEvents');
-      } else {
-        console.log(data);
-      }
-    }
-  })
-})
-
-// Hapus Konten
-var delKonten = function (id) {
-  // check condition delete or no with swal
-  Swal.fire({
-    title: 'Apakah Anda Yakin?',
-    text: "Konten ini akan dihapus!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Ya, Hapus!'
-  }).then((result) => {
-    if (result.value) {
-      $.ajax({
-        url: 'crud/del-konten.php',
-        type: 'POST',
-        data: {
-          delKonten: id
-        },
-        dataType: 'json',
-        success: function (data) {
-          if (data.status == 200) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Sukses',
-              text: 'Konten Dihapus',
-              showConfirmButton: false,
-              timer: 1500
-            });
-            $('#calendar').fullCalendar('refetchEvents');
-            $('#viewKontenModal').modal('hide');
-          } else {
-            alert(data.message);
-          }
-        }
-      })
-    }
-  })
-}
-
-// Edit Konten
+// Update Content
 var editKonten = function () {
   checkDataPillar();
   if(_event.status == 'Revision') {
@@ -552,5 +414,265 @@ var editKonten = function () {
         }
       }
     })
+  })
+}
+
+/**
+ * All Function Delete
+ */
+
+// Delete Category
+var delKategori = function (id) {
+  $.ajax({
+    url: 'crud/delete.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      idCategory: id,
+      deleteCategory: true
+    },
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        dataKategori();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    }
+  });
+}
+
+// Delete Pillar
+var delPillar = function (id) {
+  $.ajax({
+    url: 'crud/delete.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      idPillar: id,
+      deletePillar: true
+    },
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        dataPillar();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: response.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    }
+  })
+}
+
+// Delete Content
+var delKonten = function (id) {
+  // check condition delete or no with swal
+  Swal.fire({
+    title: 'Apakah Anda Yakin?',
+    text: "Konten ini akan dihapus!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Ya, Hapus!'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: 'crud/delete.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          idContent: id,
+          deleteContent: true
+        },
+        success: function (response) {
+          if (response.status == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Sukses',
+              text: response.message,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            $('#calendar').fullCalendar('refetchEvents');
+            $('#viewKontenModal').modal('hide');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              text: response.message,
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        }
+      })
+    }
+  })
+}
+
+/**
+ * All Function Refresh Data
+ */
+
+// Refresh Data Category on Modal
+var dataKategori = function () {
+  $.ajax({
+    url: 'crud/read.php',
+    type: 'POST',
+    data: {
+      readCategoryModal: true
+    },
+    success: function (data) {
+      $('#dataKategori').html(data);
+      $('#tableKategori').DataTable({
+        'pageLength': 5,
+        'lengthMenu': [5, 10, 20, 30, 40, 50],
+        'searching': false,
+      });
+    }
+  });
+}
+
+// Refresh Data Pillar on Modal
+var dataPillar = function () {
+  $.ajax({
+    url: 'crud/read.php',
+    type: 'POST',
+    data: {
+      readPillarModal: true
+    },
+    success: function (data) {
+      $('#dataPillar').html(data);
+      $('#tablePillar').DataTable({
+        'pageLength': 5,
+        'lengthMenu': [5, 10, 20, 30, 40, 50],
+        'searching': false,
+      });
+    }
+  });
+}
+
+// Load Data Pillar di Add/Edit Modal Konten
+var checkDataPillar = () => {
+  checkURL();
+  setDefaultDate();
+  setDefaultTime();
+  $.ajax({
+    url: 'crud/read.php',
+    type: 'POST',
+    data: {
+      readPillarContent: true
+    },
+    success: function (data) {
+      $('#selectPillar').html(data);
+      $('#updatePillarContent').html(data);
+    }
+  })
+}
+
+// Check Parameter URL Found ?kategori or not, if not pushState to ?kategori
+var checkURL = function () {
+  var url = window.location.href;
+  var urlSplit = url.split('?');
+  var idCategory = $('#loadKategoriKalendar').val()
+  if (urlSplit[1] == undefined) {
+    window.history.pushState('', '', '?kategori=' + idCategory);
+  }
+}
+
+// Refresh Halaman Setelah Memilih Kategori
+var checkDataCategory = () => {
+  checkURL();
+  $.ajax({
+    url: 'crud/read.php',
+    type: 'POST',
+    data: {
+      readCategoryCalendar: true
+    },
+    success: function (data) {
+      $('#loadKategoriKalendar').html(data);
+      // Search Paramater URL
+      var url = new URL(window.location.href);
+      var searchParams = new URLSearchParams(url.search);
+      var kategori = searchParams.get('kategori');
+      $('#loadKategoriKalendar').val(kategori);
+      if (kategori) {
+        $('#loadKategoriKalendar').on('change', function (e) {
+          var load = $('#loadKategoriKalendar').val();
+          window.location.href = "?kategori=" + load;
+          // window.history.pushState('', '', '?kategori=' + load); // Masih belum nemu caranya
+          $('#calendar').fullCalendar('refetchEvents');
+        });
+      }
+    }
+  })
+}
+
+// Logout
+var logout = function () {
+  $.ajax({
+    url: 'config/auth.php',
+    type: 'POST',
+    data: {
+      logout: true
+    },
+    success: function () {
+      // swal confirm info logout or not
+      Swal.fire({
+        title: 'Apakah Anda Yakin?',
+        text: "Anda akan keluar dari akun!",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, Keluar!'
+      }).then((result) => {
+        if (result.value) {
+          var timerInterval
+          Swal.fire({
+            title: 'Logout...',
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          })
+          setTimeout(() => {
+            window.location.href = 'index.php';
+          }, 1000);
+        }
+      })
+    }
   })
 }

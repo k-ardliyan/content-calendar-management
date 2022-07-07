@@ -57,9 +57,9 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
   <!-- DataTables -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/sl-1.4.0/datatables.min.css"/>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/sl-1.4.0/datatables.min.js"></script>
-
   <link rel="stylesheet" href="assets/css/style.css">
 
+  
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-stisla.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -79,7 +79,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
             <img alt="image" src="assets/images/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, Gamelab</div></a>
+            <div class="d-sm-none d-lg-inline-block">Hi, <?= $_SESSION['name'] ?> </div></a>
           </li>
         </ul>
       </nav>
@@ -87,7 +87,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="#">Calendar Management</a>
+            <a href="#">CalendarM</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="#">CM</a>
@@ -98,13 +98,8 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
               <li class="active"><a class="nav-link" href="#"><i class="far fa-calendar"></i> <span>Calendar</span></a></li>
               <li class="menu-header">Settings</li>
               <li><a class="nav-link" href="#"><i class="far fa-user"></i> <span>Users</span></a></li>
+              <li><a class="nav-link text-danger" href="javascript:logout();"><i class="fas fa-sign-out-alt" style="transform: scale(-1, 1);"></i> <span>Logout</span></a></li>
             </ul>
-
-            <!-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a href="https://github.com/k-ardliyan/content-calendar-management" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> Repository
-              </a>
-            </div> -->
         </aside>
       </div>
 

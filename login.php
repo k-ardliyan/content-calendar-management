@@ -95,7 +95,7 @@ if (isset($_SESSION['team_id'])) {
 				data: {
 					email: email,
 					password: password,
-					login: 'login',
+					login: true
 				},
 				dataType: 'json',
 				success: function(data) {
@@ -103,7 +103,7 @@ if (isset($_SESSION['team_id'])) {
 						// toastr with progress bar + setTimeout
 						toastr.success(data.message, 'Success', {
 							progressBar: true,
-							timeOut: 1500,
+							timeOut: 1000,
 							onHidden: function() {
 								window.location.href = 'calendar.php';
 							}
@@ -111,7 +111,7 @@ if (isset($_SESSION['team_id'])) {
 					} else {
 						toastr.error(data.message, 'Error', {
 							progressBar: true,
-							timeOut: 1500,
+							timeOut: 1000,
 						});
 					}
 				}

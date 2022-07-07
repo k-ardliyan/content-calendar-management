@@ -1,30 +1,28 @@
 <?php
  
-// mengaktifkan session php
 session_start();
- 
-// menghubungkan dengan koneksi
 require_once 'db.php';
 
 $login = isset($_POST['login']) ? $_POST['login'] : false;
 $register = isset($_POST['register']) ? $_POST['register'] : false;
 $logout = isset($_POST['logout']) ? $_POST['logout'] : false;
 
-if ($login=='login'){
+if ($login == true){
 	$email = $_POST['email'];
 	$password = md5($_POST['password']);
 	$result = $mysqli->query("SELECT * FROM teams WHERE email='$email' AND password='$password'");
 	if ($result->num_rows > 0) {
 		$row = $result->fetch_assoc();
 		$_SESSION['team_id'] = $row['id'];
-		$_SESSION['role'] = $row['role'];
+		$_SESSION['name'] = $row['name'];
+		$_SESSION['role_id'] = $row['role_id'];
 		$status = 200;
 		$message = "Success Login";
 	} else {
 		$status = 400;
 		$message = "Failed Login";
 	}
-} else if ($register=='register'){
+} else if ($register == true){
 	//check email already exists
 	$email = $_POST['email'];
 	$result = $mysqli->query("SELECT * FROM teams WHERE email='$email'");
@@ -35,7 +33,7 @@ if ($login=='login'){
 		$name = $_POST['name'];
 		$password = md5($_POST['password']);
 		$role = 3;
-		$result = $mysqli->query("INSERT INTO teams (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')");
+		$result = $mysqli->query("INSERT INTO teams (name, email, password, role_id) VALUES ('$name', '$email', '$password', '$role')");
 		if ($result) {
 			$status = 200;
 			$message = "Menuju halaman login";
@@ -45,12 +43,11 @@ if ($login=='login'){
 		}
 	}
 	
-} else if ($logout==true){
+} else if ($logout == true){
 	$status = 200;
 	$message = "Success Logout";
 	session_start();
 	session_destroy();
-	header("Location: ../login.php");
 }
 
 $status = [
