@@ -39,28 +39,36 @@
             <div id="detailUrlContainer" class="row align-items-end mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="URL">
               <div class="col-1"><i class="bx bx-link bx-sm"></i></div>
               <div class="col align-self-start">
-                <a id="detailUrl" href="#" target="_blank">www.google.co.id</a>
+                <a id="detailUrl" href="#" target="_blank">
+                  <!-- detail url -->
+                </a>
               </div>
             </div>
             <div class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Konten">
               <div class="col-1"><i class="bx bx-align-left bx-sm"></i></div>
-              <div id="detailContent" class="col align-self-start">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</div>
+              <div id="detailContent" class="col align-self-start">
+                <!-- detail content -->
+              </div>
             </div>
             <div class="row mt-2 mb-3" data-toggle="tooltip" data-placement="left" title="Copywriting">
               <div class="col-1"><i class="bx bx-highlight bx-sm"></i></div>
-              <div id="detailCopywriting" class="col align-self-start">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat aspernatur eligendi
-                beatae maxime est adipisci rerum ut perferendis, illo molestiae, architecto aut, quibusdam sed.
-                Officiis magnam cum error molestiae esse!</div>
+              <div id="detailCopywriting" class="col align-self-start">
+                <!-- detail copywriting -->
+              </div>
             </div>
             <div id="detailRevisionContainer" class="row mt-2 mb-3 text-danger" data-toggle="tooltip" data-placement="left" title="Revisi">
               <div class="col-1"><i class="bx bx-error-alt bx-sm"></i></div>
-              <div id="detailRevision" class="col align-self-start">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, velit! Enim velit
-                blanditiis maxime. Exercitationem, voluptate illum, sapiente minus repellendus fuga repudiandae, nobis
-                molestiae voluptates explicabo quis dolore quos vero?</div>
+              <div class="col align-self-start">
+                <div id="detailRevision" class="alert alert-danger py-2 px-3 mb-0">
+                  <!-- detail revision -->
+                </div>
+              </div>
             </div>
-            <div id="detailReviewerContainer" class="row mt-2 mb-3 text-success" data-toggle="tooltip" data-placement="left" title="Reviewer">
+            <div id="detailReviewerContainer" class="row mt-2 mb-3 text-info" data-toggle="tooltip" data-placement="left" title="Reviewer">
               <div class="col-1"><i class='bx bx-user-check bx-sm'></i></div>
-              <div id="detailReviewer" class="col align-self-start"></div>
+              <div id="detailReviewer" class="col align-self-start">
+                  <!-- detail reviewer -->
+              </div>
             </div>
           </div>
         </div>

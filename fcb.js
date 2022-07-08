@@ -335,18 +335,18 @@ var editPillar = function (id, name) {
 var editKonten = function () {
   // check team_id on updatecontent must be same with team_id on content
   // user tidak boleh edit konten user lain
-  if (_event.team_id != _session.team_id && _session.role == 3) {
+  if (_event.team_id_content != _session.team_id && _session.role == 3) {
     Swal.fire({
       icon: 'error',
       title: 'Gagal',
-      text: 'Team ID tidak sama',
+      text: 'Anda tidak dapat mengubah konten yang bukan milik anda',
       showConfirmButton: false,
       timer: 1500
     })
     return false;
   }
   checkDataPillar();
-  if(_event.status == 'Revision') {
+  if(_event.status_content == 'Revision') {
     $('#updateRevisiContainer').removeClass('d-none');
   } else {
     $('#updateRevisiContainer').addClass('d-none');
@@ -367,16 +367,16 @@ var editKonten = function () {
     }
   })
   setTimeout(() => {
-    $('#idKonten').val(_event.id_calendar_content);
-    $('#updateNama').val(_event.cc_name);
+    $('#idKonten').val(_event.id_content);
+    $('#updateNama').val(_event.name_content);
     $('#updateUrl').val(_event.url_content);
-    $('#updateContent').val(_event.content);
-    $('#updateCopywriting').val(_event.copywriting);
-    $('#updateStatus').val(_event.status);
-    $('#updateTanggal').val(_event.date);
-    $('#updateJam').val(_event.time);
+    $('#updateContent').val(_event.content_content);
+    $('#updateCopywriting').val(_event.copywriting_content);
+    $('#updateStatus').val(_event.status_content);
+    $('#updateTanggal').val(_event.date_content);
+    $('#updateJam').val(_event.time_content);
     $('#updateRevisi').val(_event.revision);
-    $('#updatePillarContent').val(_event.content_pillar_id);  
+    $('#updatePillarContent').val(_event.pillar_id_content);  
     $('#viewKontenModal').modal('hide');
     $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
   }, 500);
@@ -415,7 +415,7 @@ var editKonten = function () {
         time: time,
         revision: revision,
         pillar: pillar,
-        team: _event.team_id,
+        team: _event.team_id_content,
         category: category,
         updateContent: true
       },
@@ -517,6 +517,16 @@ var delPillar = function (id) {
 // Delete Content
 var delKonten = function (id) {
   // check condition delete or no with swal
+  if (_event.team_id_content != _session.team_id && _session.role == 3) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal',
+      text: 'Anda tidak dapat menghapus konten yang bukan milik anda',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    return false;
+  }
   Swal.fire({
     title: 'Apakah Anda Yakin?',
     text: "Konten ini akan dihapus!",

@@ -23,27 +23,27 @@ $(document).ready(function () {
             _event = event;
             console.log(_event);
             // Init Variable
-            const id = event.id_calendar_content;
-            const category = event.ccc_name;
-            const name = event.cc_name;
-            const content = event.content;
-            const copywriting = event.copywriting;
-            const status = event.status;
-            const pillarName = event.cp_name;
+            const id = event.id_content;
+            const category = event.name_category;
+            const name = event.name_content;
+            const content = event.content_content;
+            const copywriting = event.copywriting_content;
+            const status = event.status_content;
+            const pillarName = event.name_pillar;
             const color = event.color;
             const url = event.url_content;
             const revision = event.revision;
             const reviewer = event.reviewer;
 
             // Setting Waktu = getDay, getDate, getMonth, getFullYear
-            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu'];
             const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            const date = new Date(event.date);
+            const date = new Date(event.date_content);
             const day = days[date.getDay()];
             const dateString = day + ', ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ' - ';
 
             // change time format to hh:mm
-            const time = event.time.split(':');
+            const time = event.time_content.split(':');
             const timeString = time[0] + ':' + time[1];
 
             // Tampilan Detail Modal Konten
@@ -56,7 +56,6 @@ $(document).ready(function () {
             $('#detailPillar').text(pillarName);
             $('#detailDate').text(dateString);
             $('#detailTime').text(timeString);
-            $('#detailReviewer').text(reviewer);
 
             // Cek ada URL atau Tidak
             if (url == "" || url == null) {
@@ -70,16 +69,24 @@ $(document).ready(function () {
             // Status Revisi atau Tidak
             if (status === 'Revision') {
                 if (revision == '' || revision == null) {
-                    $('#detailRevision').text('Segera melakukan revisi konten');
-                    $('#detailRevision').addClass('text-danger font-italic');
+                    $('#detailRevision').text('Belum ada pesan revisi untuk konten ini');
+                    $('#detailReviewer').text('Belum ada reviewer');
+                    $('#detailReviewer').addClass('font-italic');
+                    $('#detailRevision').addClass('font-italic');
                 } else {
                     $('#detailRevision').text(revision);
+                    $('#detailReviewer').removeClass('font-italic');
+                    $('#detailReviewer').text(reviewer);
                 }
                 $('#detailRevision').removeClass('d-none');
                 $('#detailRevisionContainer').removeClass('d-none');
+                $('#detailReviewer').removeClass('d-none');
+                $('#detailReviewerContainer').removeClass('d-none');
             } else {
                 $('#detailRevision').addClass('d-none');
                 $('#detailRevisionContainer').addClass('d-none');
+                $('#detailReviewer').addClass('d-none');
+                $('#detailReviewerContainer').addClass('d-none');
             }
 
             // Cek Pernah Menulis Revisi

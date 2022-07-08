@@ -28,6 +28,7 @@ if ($deleteCategory == true) {
     }
 } else if ($deleteContent == true) {
     $idContent = isset($_POST['idContent']) ? $_POST['idContent'] : '';
+    // with cascade on table calendar_content_revisions
     $result = $mysqli->query("DELETE FROM calendar_contents WHERE id = '$idContent'");
     if ($result) {
         $status = 200;
