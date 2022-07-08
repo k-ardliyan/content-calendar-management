@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="editKategori">
+          <form id="editCategory">
             <div class="form-row">
               <div class="form-group col-md-9">
                 <input type="hidden" name="idKategori" id="idKategori">

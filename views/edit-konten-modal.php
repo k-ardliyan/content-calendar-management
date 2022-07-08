@@ -13,7 +13,7 @@
             <?php
             
             ?>
-          <form id="editKontenForm">
+          <form id="editContentForm">
             <input type="hidden" name="idKonten" id="idKonten">
             <input type="hidden" name="updateTeam" id="updateTeam" value="<?= $_SESSION['team_id']  ?>">
             <div class="form-group">

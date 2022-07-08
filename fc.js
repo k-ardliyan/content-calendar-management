@@ -12,7 +12,7 @@ $(document).ready(function () {
         eventLimitText: "konten lainnya",
         views: {month:{eventLimit: 2}},
         events: {
-            url: 'crud/data.php?kategori=' + $('#loadKategoriKalendar').val(),
+            url: 'crud/data.php?c=' + $('#dataByCategory').val(),
         },
         eventRender: function(event, element){
             if(event.icon) {
@@ -95,10 +95,10 @@ $(document).ready(function () {
             }
 
             // Delete Konten
-            $('#delKonten').attr('onclick', 'delKonten(' + id + ')');
+            $('#delContent').attr('onclick', 'delContent(' + id + ')');
 
             // Edit
-            $('#editKonten').attr('onclick', 'editKonten()');
+            $('#editContent').attr('onclick', 'editContent()');
 
             // Tampilan Modal
             $('#viewKontenModal').modal();

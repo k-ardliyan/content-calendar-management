@@ -18,10 +18,10 @@
                 <button type="button" class="close pl-1" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="Tutup">
                   <span aria-hidden="true"><i class='bx bx-x'></i></span>
                 </button>
-                <button type="button" class="close pl-1" data-toggle="tooltip" data-placement="bottom" title="Hapus" id="delKonten">
+                <button type="button" class="close pl-1" data-toggle="tooltip" data-placement="bottom" title="Hapus" id="delContent">
                   <span aria-hidden="true"><i class='bx bx-trash'></i></span>
                 </button>
-                <button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Ubah" id="editKonten">
+                <button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Ubah" id="editContent">
                   <span aria-hidden="true"><i class='bx bx-pencil'></i></span>
                 </button>
               </div>

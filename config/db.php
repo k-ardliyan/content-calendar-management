@@ -1,11 +1,17 @@
 <?php 
-// Create Connection to Database MYSQL
+
+// Create Connection Database with PDO
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db = "ccm";
-$mysqli = new mysqli($host, $user, $pass, $db);
-if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+$username = "root";
+$password = "";
+$dbname = "ccm";
+// try catch block to handle error
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+    die();
 }
+
 ?>

@@ -9,15 +9,12 @@ if (!isset($_SESSION['team_id'])) {
   header("Location: login.php");
 }
 
-$result = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
-$resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
+$sql = "SELECT * FROM calendar_content_categories ORDER BY id ASC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($resultKategori as $row) {
-    $dataKategori[] = $row;
-}
-
-$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
-
+$category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
 
 ?>
 
@@ -82,7 +79,13 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
         <!-- Navbar -->
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg nav-link-user">
-            <img alt="image" src="assets/images/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <?php if ($_SESSION['role_id']==1):?>
+              <img alt="image" src="assets/images/avatar/avatar-5.png" class="rounded-circle mr-1">
+            <?php elseif ($_SESSION['role_id']==2):?>
+              <img alt="image" src="assets/images/avatar/avatar-3.png" class="rounded-circle mr-1">
+            <?php else:?>
+              <img alt="image" src="assets/images/avatar/avatar-2.png" class="rounded-circle mr-1">
+            <?php endif;?>
             <div class="d-sm-none d-lg-inline-block">Hi, <?= $_SESSION['name'] ?> </div></a>
           </li>
         </ul>
@@ -119,10 +122,9 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
                     <div>
                       <ul class="navbar-nav flex-row align-items-center" style="grid-gap: 12px;">
                         <li class="nav-item active">
-                            <select class="form-select nav-link px-2 py-1" id="loadKategoriKalendar" onclick="checkDataCategory()" style="border-radius: 20px;">
-                            <!-- loadKategoriKalendar -->
-                            <?php foreach($resultKategori as $row): ?>
-                            <option value="<?= $row['id'] ?>" <?= $row['id'] == $kategori ? 'selected':'' ?> ><?= $row['name']?></option>
+                            <select class="form-select nav-link px-2 py-1" id="dataByCategory" onclick="checkDataCategory()" style="border-radius: 20px;">
+                            <?php foreach($result as $row): ?>
+                              <option value="<?= $row['id'] ?>" <?= $row['id'] == $category ? 'selected':'' ?> ><?= $row['name']?></option>
                             <?php endforeach ?>
                             </select>
                         </li>
@@ -137,7 +139,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataCategory()">
                             <i class="bi-plus"></i>Kategori
                             </button>
                         </li>
@@ -201,3 +203,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
 </body>
 
 </html>
+
+<?php 
+$pdo = null;
+?>

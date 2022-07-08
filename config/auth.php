@@ -7,47 +7,44 @@ $login = isset($_POST['login']) ? $_POST['login'] : false;
 $register = isset($_POST['register']) ? $_POST['register'] : false;
 $logout = isset($_POST['logout']) ? $_POST['logout'] : false;
 
-if ($login == true){
+if ($login == true) {
 	$email = $_POST['email'];
 	$password = md5($_POST['password']);
-	$result = $mysqli->query("SELECT * FROM teams WHERE email='$email' AND password='$password'");
-	if ($result->num_rows > 0) {
-		$row = $result->fetch_assoc();
-		$_SESSION['team_id'] = $row['id'];
-		$_SESSION['name'] = $row['name'];
-		$_SESSION['role_id'] = $row['role_id'];
+	$stmt = $pdo->prepare("SELECT * FROM teams WHERE email = :email AND password = :password");
+	$stmt->bindParam(':email', $email);
+	$stmt->bindParam(':password', $password);
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	if ($result) {
+		$_SESSION['team_id'] = $result['id'];
+		$_SESSION['name'] = $result['name'];
+		$_SESSION['role_id'] = $result['role_id'];
 		$status = 200;
 		$message = "Success Login";
 	} else {
 		$status = 400;
 		$message = "Failed Login";
 	}
-} else if ($register == true){
-	//check email already exists
+} else if ($register == true) {
+	$name = $_POST['name'];
 	$email = $_POST['email'];
-	$result = $mysqli->query("SELECT * FROM teams WHERE email='$email'");
-	if ($result->num_rows > 0) {
-		$status = 400;
-		$message = "Email already exists";
-	} else {
-		$name = $_POST['name'];
-		$password = md5($_POST['password']);
-		$role = 3;
-		$result = $mysqli->query("INSERT INTO teams (name, email, password, role_id) VALUES ('$name', '$email', '$password', '$role')");
-		if ($result) {
-			$status = 200;
-			$message = "Menuju halaman login";
-		} else {
-			$status = 400;
-			$message = "Failed Register";
-		}
-	}
-	
-} else if ($logout == true){
+	$password = md5($_POST['password']);
+	$role_id = 3;
+	$stmt = $pdo->prepare("INSERT INTO teams (name, email, password, role_id) VALUES (:name, :email, :password, :role_id)");
+	$stmt->bindParam(':name', $name);
+	$stmt->bindParam(':email', $email);
+	$stmt->bindParam(':password', $password);
+	$stmt->bindParam(':role_id', $role_id);
+	$stmt->execute();
+	$status = 200;
+	$message = "Success Register";
+} else if ($logout == true) {
+	session_destroy();
 	$status = 200;
 	$message = "Success Logout";
-	session_start();
-	session_destroy();
+} else {
+	$status = 400;
+	$message = "Failed";
 }
 
 $status = [
@@ -56,5 +53,7 @@ $status = [
 ];
 
 echo json_encode($status);
+
+$pdo = null;
 
 ?>

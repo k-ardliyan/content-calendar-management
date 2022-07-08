@@ -14,12 +14,17 @@ if ($addCategory == true) {
     $nameCategory = str_replace('"', '&#34;', $nameCategory);
 
     // check same name category
-    $result = $mysqli->query("SELECT * FROM calendar_content_categories WHERE name='$nameCategory'");
-    if ($result->num_rows > 0) {
+    $stmt = $pdo->prepare("SELECT * FROM calendar_content_categories WHERE name = :name");
+    $stmt->bindParam(':name', $nameCategory);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    if (count($result) > 0) {
         $status = 400;
-        $message = "Category already exists";
+        $message = "Same name category";
     } else {
-        $result = $mysqli->query("INSERT INTO calendar_content_categories (name) VALUES ('$nameCategory')");
+        $stmt = $pdo->prepare("INSERT INTO calendar_content_categories (name) VALUES (:name)");
+        $stmt->bindParam(':name', $nameCategory);
+        $result = $stmt->execute();
         if ($result) {
             $status = 200;
             $message = "Success add category";
@@ -36,12 +41,17 @@ if ($addCategory == true) {
     $namePillar = str_replace('"', '&#34;', $namePillar);
 
     // check same name pillar
-    $result = $mysqli->query("SELECT * FROM content_pillars WHERE name='$namePillar'");
-    if ($result->num_rows > 0) {
+    $stmt = $pdo->prepare("SELECT * FROM content_pillars WHERE name = :name");
+    $stmt->bindParam(':name', $namePillar);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    if (count($result) > 0) {
         $status = 400;
-        $message = "Pillar already exists";
+        $message = "Same name pillar";
     } else {
-        $result = $mysqli->query("INSERT INTO content_pillars (name) VALUES ('$namePillar')");
+        $stmt = $pdo->prepare("INSERT INTO content_pillars (name) VALUES (:name)");
+        $stmt->bindParam(':name', $namePillar);
+        $result = $stmt->execute();
         if ($result) {
             $status = 200;
             $message = "Success add pillar";
@@ -58,13 +68,22 @@ if ($addCategory == true) {
     $status = isset($_POST['status']) ? $_POST['status'] : '';
     $date = isset($_POST['date']) ? $_POST['date'] : '';
     $time = isset($_POST['time']) ? $_POST['time'] : '';
-    $revision = isset($_POST['revision']) ? $_POST['revision'] : '';
     $content_pillar_id = isset($_POST['pillar']) ? $_POST['pillar'] : '';
     $team_id = isset($_POST['team']) ? $_POST['team'] : '';
     $calendar_content_category_id = isset($_POST['category']) ? $_POST['category'] : '';
 
-    $result = $mysqli->query("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, content_pillar_id, team_id, calendar_content_category_id) VALUES ('$name', '$url', '$content', '$copywriting', '$status', '$date', '$time', '$content_pillar_id', '$team_id', '$calendar_content_category_id')");
-
+    $stmt = $pdo->prepare("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, content_pillar_id, team_id, calendar_content_category_id) VALUES (:name, :url, :content, :copywriting, :status, :date, :time, :content_pillar_id, :team_id, :calendar_content_category_id)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':content', $content);
+    $stmt->bindParam(':copywriting', $copywriting);
+    $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':date', $date);
+    $stmt->bindParam(':time', $time);
+    $stmt->bindParam(':content_pillar_id', $content_pillar_id);
+    $stmt->bindParam(':team_id', $team_id);
+    $stmt->bindParam(':calendar_content_category_id', $calendar_content_category_id);
+    $result = $stmt->execute();
     if ($result) {
         $status = 200;
         $message = "Success add content";
@@ -80,5 +99,7 @@ $status = [
 ];
 
 echo json_encode($status);
+
+$pdo = null;
 
 ?>

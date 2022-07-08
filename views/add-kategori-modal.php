@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="addKategori" class="">
+          <form id="addCategory" class="">
             <div class="form-row">
               <div class="form-group col-md-9">
                 <input type="text" name="inputKategori" id="inputKategori" class="form-control"
@@ -26,7 +26,7 @@
               </div>
             </div>
           </form>
-          <div id="dataKategori">
+          <div id="dataCategory">
 
           </div>
         </div>

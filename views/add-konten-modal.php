@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="addKonten">
+          <form id="addContent">
             <input type="hidden" name="inputTeam" id="inputTeam" value="<?= $_SESSION['team_id']  ?>">
             <div class="form-group">
               <label for="inputNama">Nama</label>

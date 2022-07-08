@@ -8,17 +8,22 @@ $deletePillar = isset($_POST['deletePillar']) ? $_POST['deletePillar'] : false;
 
 if ($deleteCategory == true) {
     $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : '';
-    $result = $mysqli->query("DELETE FROM calendar_content_categories WHERE id = '$idCategory'");
+    $stmt = $pdo->prepare("DELETE FROM calendar_content_categories WHERE id = :id");
+    $stmt->bindParam(':id', $idCategory);
+    $result = $stmt->execute();
     if ($result) {
         $status = 200;
         $message = "Success delete category";
     } else {
         $status = 400;
         $message = "Failed delete category";
+        
     }
 } else if ($deletePillar == true) {
     $idPillar = isset($_POST['idPillar']) ? $_POST['idPillar'] : '';
-    $result = $mysqli->query("DELETE FROM content_pillars WHERE id = '$idPillar'");
+    $stmt = $pdo->prepare("DELETE FROM content_pillars WHERE id = :id");
+    $stmt->bindParam(':id', $idPillar);
+    $result = $stmt->execute();
     if ($result) {
         $status = 200;
         $message = "Success delete pillar";
@@ -29,7 +34,9 @@ if ($deleteCategory == true) {
 } else if ($deleteContent == true) {
     $idContent = isset($_POST['idContent']) ? $_POST['idContent'] : '';
     // with cascade on table calendar_content_revisions
-    $result = $mysqli->query("DELETE FROM calendar_contents WHERE id = '$idContent'");
+    $stmt = $pdo->prepare("DELETE FROM calendar_contents WHERE id = :id");
+    $stmt->bindParam(':id', $idContent);
+    $result = $stmt->execute();
     if ($result) {
         $status = 200;
         $message = "Success delete content";
@@ -45,5 +52,7 @@ $status = [
 ];
 
 echo json_encode($status);
+
+$pdo = null;
 
 ?>

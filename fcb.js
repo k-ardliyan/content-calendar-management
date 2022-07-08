@@ -61,8 +61,8 @@ $('#updateStatus').change(function () {
  * All Create Function
  */
 
-// Add Categori
-$('#addKategori').submit(function (e) {
+// Create Categori
+$('#addCategory').submit(function (e) {
   e.preventDefault();
   $.ajax({
     url: 'crud/create.php',
@@ -81,7 +81,7 @@ $('#addKategori').submit(function (e) {
           showConfirmButton: false,
           timer: 1500
         })
-        dataKategori();
+        dataCategory();
         $('form').trigger('reset');
       } else {
         // swal.fire gives the error message
@@ -97,7 +97,7 @@ $('#addKategori').submit(function (e) {
   });
 });
 
-// Tambah Pillar
+// Create Pillar
 $('#addPillar').submit(function (e) {
   e.preventDefault();
   $.ajax({
@@ -133,19 +133,9 @@ $('#addPillar').submit(function (e) {
   })
 })
 
-// Add Content
-$('#addKonten').submit(function (e) {
+// Create Content
+$('#addContent').submit(function (e) {
   e.preventDefault();
-  // if ($('#selectStatus').val() == 'Revision' && _session.role == 3) {
-  //   Swal.fire({
-  //     icon: 'error',
-  //     title: 'Gagal',
-  //     text: 'Team ID tidak sama',
-  //     showConfirmButton: false,
-  //     timer: 1500
-  //   })
-  //   return false;
-  // }
   var name = $('#inputNama').val();
   var content = $('#inputContent').val();
   var copywriting = $('#inputCopywriting').val();
@@ -205,7 +195,7 @@ $('#addKonten').submit(function (e) {
  */
 
 // Update Category
-var editKategori = function (id, name) {
+var editCategory = function (id, name) {
   var timerInterval
   Swal.fire({
     title: 'Loading',
@@ -228,7 +218,7 @@ var editKategori = function (id, name) {
     $('input#idKategori').val(id);
     $('input#updateKategori').val(name);
   }, 500);
-  $('#editKategori').submit(function (e) {
+  $('#editCategory').submit(function (e) {
     e.preventDefault();
     $.ajax({
       url: 'crud/update.php',
@@ -244,7 +234,7 @@ var editKategori = function (id, name) {
           setTimeout(() => {
             $('#kategoriEditModal').modal('hide');
             $('#kategoriModal').modal('show');
-            dataKategori();
+            dataCategory();
           }, 1000)
           Swal.fire({
             icon: 'success',
@@ -332,7 +322,7 @@ var editPillar = function (id, name) {
 }
 
 // Update Content
-var editKonten = function () {
+var editContent = function () {
   // check team_id on updatecontent must be same with team_id on content
   // user tidak boleh edit konten user lain
   if (_event.team_id_content != _session.team_id && _session.role == 3) {
@@ -381,7 +371,7 @@ var editKonten = function () {
     $('#kontenEditModal').modal('show').css('overflow-y', 'auto');
   }, 500);
   
-  $('#editKontenForm').submit(function (e) {
+  $('#editContentForm').submit(function (e) {
     e.preventDefault();
     var name = $('#updateNama').val();
     var url = $('#updateUrl').val();
@@ -449,7 +439,7 @@ var editKonten = function () {
  */
 
 // Delete Category
-var delKategori = function (id) {
+var delCategory = function (id) {
   $.ajax({
     url: 'crud/delete.php',
     type: 'POST',
@@ -467,7 +457,7 @@ var delKategori = function (id) {
           showConfirmButton: false,
           timer: 1500
         });
-        dataKategori();
+        dataCategory();
       } else {
         Swal.fire({
           icon: 'error',
@@ -515,7 +505,7 @@ var delPillar = function (id) {
 }
 
 // Delete Content
-var delKonten = function (id) {
+var delContent = function (id) {
   // check condition delete or no with swal
   if (_event.team_id_content != _session.team_id && _session.role == 3) {
     Swal.fire({
@@ -576,7 +566,7 @@ var delKonten = function (id) {
  */
 
 // Refresh Data Category on Modal
-var dataKategori = function () {
+var dataCategory = function () {
   $.ajax({
     url: 'crud/read.php',
     type: 'POST',
@@ -584,7 +574,7 @@ var dataKategori = function () {
       readCategoryModal: true
     },
     success: function (data) {
-      $('#dataKategori').html(data);
+      $('#dataCategory').html(data);
       $('#tableKategori').DataTable({
         'pageLength': 5,
         'lengthMenu': [5, 10, 20, 30, 40, 50],
@@ -631,13 +621,13 @@ var checkDataPillar = () => {
   })
 }
 
-// Check Parameter URL Found ?kategori or not, if not pushState to ?kategori
+// Check Parameter URL Found ?c or not, if not pushState to ?c
 var checkURL = function () {
   var url = window.location.href;
   var urlSplit = url.split('?');
-  var idCategory = $('#loadKategoriKalendar').val()
+  var idCategory = $('#dataByCategory').val()
   if (urlSplit[1] == undefined) {
-    window.history.pushState('', '', '?kategori=' + idCategory);
+    window.history.pushState('', '', '?c=' + idCategory);
   }
 }
 
@@ -651,17 +641,17 @@ var checkDataCategory = () => {
       readCategoryCalendar: true
     },
     success: function (data) {
-      $('#loadKategoriKalendar').html(data);
+      $('#dataByCategory').html(data);
       // Search Paramater URL
       var url = new URL(window.location.href);
       var searchParams = new URLSearchParams(url.search);
-      var kategori = searchParams.get('kategori');
-      $('#loadKategoriKalendar').val(kategori);
+      var kategori = searchParams.get('c');
+      $('#dataByCategory').val(kategori);
       if (kategori) {
-        $('#loadKategoriKalendar').on('change', function (e) {
-          var load = $('#loadKategoriKalendar').val();
-          window.location.href = "?kategori=" + load;
-          // window.history.pushState('', '', '?kategori=' + load); // Masih belum nemu caranya
+        $('#dataByCategory').on('change', function (e) {
+          var load = $('#dataByCategory').val();
+          window.location.href = "?c=" + load;
+          // window.history.pushState('', '', '?c=' + load); // Masih belum nemu caranya
           $('#calendar').fullCalendar('refetchEvents');
         });
       }

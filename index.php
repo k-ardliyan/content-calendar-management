@@ -14,10 +14,10 @@ $result = $mysqli->query("SELECT * FROM calendar_contents ORDER BY id");
 $resultKategori = $mysqli->query("SELECT * FROM calendar_content_categories");
 
 foreach ($resultKategori as $row) {
-    $dataKategori[] = $row;
+    $dataCategory[] = $row;
 }
 
-$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'];
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataCategory[0]['id'];
 
 
 ?>
@@ -86,7 +86,7 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
             </button>
           </li>
           <li class="nav-item">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataCategory()">
               <i class="bi-plus"></i>Kategori
             </button>
           </li>
