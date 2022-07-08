@@ -58,6 +58,10 @@
                 blanditiis maxime. Exercitationem, voluptate illum, sapiente minus repellendus fuga repudiandae, nobis
                 molestiae voluptates explicabo quis dolore quos vero?</div>
             </div>
+            <div id="detailReviewerContainer" class="row mt-2 mb-3 text-success" data-toggle="tooltip" data-placement="left" title="Reviewer">
+              <div class="col-1"><i class='bx bx-user-check bx-sm'></i></div>
+              <div id="detailReviewer" class="col align-self-start"></div>
+            </div>
           </div>
         </div>
       </div>

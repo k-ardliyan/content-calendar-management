@@ -63,7 +63,7 @@ if ($addCategory == true) {
     $team_id = isset($_POST['team']) ? $_POST['team'] : '';
     $calendar_content_category_id = isset($_POST['category']) ? $_POST['category'] : '';
 
-    $result = $mysqli->query("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, revision, content_pillar_id, team_id, calendar_content_category_id) VALUES ('$name', '$url', '$content', '$copywriting', '$status', '$date', '$time', '$revision', '$content_pillar_id', '$team_id', '$calendar_content_category_id')");
+    $result = $mysqli->query("INSERT INTO calendar_contents (name, url, content, copywriting, status, date, time, content_pillar_id, team_id, calendar_content_category_id) VALUES ('$name', '$url', '$content', '$copywriting', '$status', '$date', '$time', '$content_pillar_id', '$team_id', '$calendar_content_category_id')");
 
     if ($result) {
         $status = 200;

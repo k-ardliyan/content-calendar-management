@@ -2,6 +2,8 @@
 
 require_once '../config/db.php';
 
+session_start();
+
 $updateCategory = isset($_POST['updateCategory']) ? $_POST['updateCategory'] : false;
 $updateContent = isset($_POST['updateContent']) ? $_POST['updateContent'] : false;
 $updatePillar = isset($_POST['updatePillar']) ? $_POST['updatePillar'] : false;
@@ -44,6 +46,52 @@ if ($updateCategory == true) {
         } else {
             $status = 400;
             $message = "Failed update pillar";
+        }
+    }
+} else if ($updateContent == true) {
+    $idContent = isset($_POST['idContent']) ? $_POST['idContent'] : '';
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $url = isset($_POST['url']) ? $_POST['url'] : '';
+    $content = isset($_POST['content']) ? $_POST['content'] : '';
+    $copywriting = isset($_POST['copywriting']) ? $_POST['copywriting'] : '';
+    $status = isset($_POST['status']) ? $_POST['status'] : '';
+    $date = isset($_POST['date']) ? $_POST['date'] : '';
+    $time = isset($_POST['time']) ? $_POST['time'] : '';
+    $revision = isset($_POST['revision']) ? $_POST['revision'] : '';
+    $content_pillar_id = isset($_POST['pillar']) ? $_POST['pillar'] : '';
+    $team_id = isset($_POST['team']) ? $_POST['team'] : '';
+    $calendar_content_category_id = isset($_POST['category']) ? $_POST['category'] : '';
+    
+    $result = $mysqli->query("UPDATE calendar_contents SET name = '$name', url = '$url', content = '$content', copywriting = '$copywriting', status = '$status', date = '$date', time = '$time', content_pillar_id = '$content_pillar_id', team_id = '$team_id', calendar_content_category_id = '$calendar_content_category_id' WHERE id = '$idContent'");
+    if ($result) {
+        $status = 200;
+        $message = "Success update content";
+    } else {
+        $status = 400;
+        $message = "Failed update content";
+    }
+
+    if ($status == 200 && $_SESSION['role_id'] != 3) {  
+        //check apakah ada revisi sebelumnya
+        $result = $mysqli->query("SELECT * FROM calendar_content_revisions WHERE calendar_content_id = '$idContent'");
+        if ($result->num_rows > 0) {
+            $result = $mysqli->query("UPDATE calendar_content_revisions SET revision = '$revision', team_id = '$_SESSION[team_id]' WHERE calendar_content_id = '$idContent'");
+            if($result){
+                $status = 200;
+                $message = "Success update revision";
+            } else {
+                $status = 400;
+                $message = "Failed update revision";
+            }
+        } else {
+            $result = $mysqli->query("INSERT INTO calendar_content_revisions (revision, calendar_content_id, team_id) VALUES ('$revision', '$idContent', '$_SESSION[team_id]')");
+            if($result){
+                $status = 200;
+                $message = "Success insert revision";
+            } else {
+                $status = 400;
+                $message = "Failed insert revision";
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ $(document).ready(function () {
             const color = event.color;
             const url = event.url_content;
             const revision = event.revision;
+            const reviewer = event.reviewer;
 
             // Setting Waktu = getDay, getDate, getMonth, getFullYear
             const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -55,6 +56,7 @@ $(document).ready(function () {
             $('#detailPillar').text(pillarName);
             $('#detailDate').text(dateString);
             $('#detailTime').text(timeString);
+            $('#detailReviewer').text(reviewer);
 
             // Cek ada URL atau Tidak
             if (url == "" || url == null) {

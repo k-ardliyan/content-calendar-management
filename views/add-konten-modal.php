@@ -64,7 +64,7 @@
             </div>
             <div id="inputRevisiContainer" class="form-group d-none">
               <label for="inputRevisi">Revisi</label>
-              <textarea name="inputResivi" id="inputRevisi" class="form-control" style="height: 140px !important;"></textarea>
+              <textarea name="inputResivi" id="inputRevisi" class="form-control" style="height: 60px !important;" readonly disabled>Pengisian revisi dilakukan saat mengubah konten</textarea>
             </div>
           
         </div>

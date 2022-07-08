@@ -136,6 +136,16 @@ $('#addPillar').submit(function (e) {
 // Add Content
 $('#addKonten').submit(function (e) {
   e.preventDefault();
+  // if ($('#selectStatus').val() == 'Revision' && _session.role == 3) {
+  //   Swal.fire({
+  //     icon: 'error',
+  //     title: 'Gagal',
+  //     text: 'Team ID tidak sama',
+  //     showConfirmButton: false,
+  //     timer: 1500
+  //   })
+  //   return false;
+  // }
   var name = $('#inputNama').val();
   var content = $('#inputContent').val();
   var copywriting = $('#inputCopywriting').val();
@@ -323,6 +333,18 @@ var editPillar = function (id, name) {
 
 // Update Content
 var editKonten = function () {
+  // check team_id on updatecontent must be same with team_id on content
+  // user tidak boleh edit konten user lain
+  if (_event.team_id != _session.team_id && _session.role == 3) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal',
+      text: 'Team ID tidak sama',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    return false;
+  }
   checkDataPillar();
   if(_event.status == 'Revision') {
     $('#updateRevisiContainer').removeClass('d-none');
@@ -361,56 +383,61 @@ var editKonten = function () {
   
   $('#editKontenForm').submit(function (e) {
     e.preventDefault();
-    var id = $('#idKonten').val();
-    var nama = $('#updateNama').val();
+    var name = $('#updateNama').val();
     var url = $('#updateUrl').val();
     var content = $('#updateContent').val();
     var copywriting = $('#updateCopywriting').val();
     var status = $('#updateStatus').val();
-    var tanggal = $('#updateTanggal').val();
-    var jam = $('#updateJam').val();
-    var revisi = $('#updateRevisi').val();
+    var date = $('#updateTanggal').val();
+    var time = $('#updateJam').val();
+    var revision = $('#updateRevisi').val();
     var pillar = $('#updatePillarContent').val();
-    var team = $('#updateTeam').val();
-    var kategori = window.location.search.split('=')[1];
+    var category = window.location.search.split('=')[1];
     // allow nama, content, copywriting use quotes
-    var nama = nama.replace(/'/g, "''");
-    var nama = nama.replace(/"/g, '""');
+    var name = name.replace(/'/g, "''");
+    var name = name.replace(/"/g, '""');
     var content = content.replace(/'/g, "''");
     var content = content.replace(/"/g, '""');
     var copywriting = copywriting.replace(/'/g, "''");
     var copywriting = copywriting.replace(/"/g, '""');
     $.ajax({
-      url: 'crud/edit-konten.php',
+      url: 'crud/update.php',
       type: 'POST',
       dataType: 'json',
       data: {
-        idKonten: id,
-        inputNama: nama,
-        inputUrl: url,
-        inputContent: content,
-        inputCopywriting: copywriting,
-        selectStatus: status,
-        inputTanggal: tanggal,
-        inputJam: jam,
-        inputRevisi: revisi,
-        selectPillar: pillar,
-        inputTeam: team,
-        inputKategori: kategori,
+        idContent: $('#idKonten').val(),
+        name: name,
+        url: url,
+        content: content,
+        copywriting: copywriting,
+        status: status,
+        date: date,
+        time: time,
+        revision: revision,
+        pillar: pillar,
+        team: _event.team_id,
+        category: category,
+        updateContent: true
       },
-      success: function (data) {
-        if (data.status == 200) {
+      success: function (response) {
+        if (response.status == 200) {
           Swal.fire({
             icon: 'success',
             title: 'Sukses',
-            text: 'Konten Telah Diubah',
+            text: response.message,
             showConfirmButton: false,
             timer: 1500
           })
           $('#kontenEditModal').modal('hide');
           $('#calendar').fullCalendar('refetchEvents');
         } else {
-          console.log(data);
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: response.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }
     })

@@ -52,6 +52,10 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
   <script>
     // variable global untuk menyimpan data konten
     const _events = {};
+    const _session = {
+      team_id: <?php echo $_SESSION['team_id']; ?>,
+      role: <?php echo $_SESSION['role_id']; ?>
+    };
   </script>
   <script src="fc.js"></script>
   <!-- DataTables -->
@@ -136,12 +140,6 @@ $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : $dataKategori[0]['id'
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#kategoriModal" onclick="dataKategori()">
                             <i class="bi-plus"></i>Kategori
                             </button>
-                        </li>
-                        <li class="nav-item">
-                            <form action="config/auth.php" method="POST">
-                            <button type="submit" name="logout" value="logout" class="btn btn-danger">Logout
-                            </button>
-                            </form>
                         </li>
                       </ul>
                     </div>

@@ -41,10 +41,14 @@
                 <select name="updateStatus" id="updateStatus" class="form-control">
                   <option value="Plan" class="badge-plan">Plan</option>
                   <option value="Ongoing" class="badge-ongoing">Ongoing</option>
-                  <option value="Need Review" class="badge-need-review">Need Review</option>
-                  <option value="Revision" class="badge-revision">Revision</option>
-                  <option value="Approved" class="badge-approved">Approved</option>
-                  <option value="Published" class="badge-published">Published</option>
+                  <option value="Need Review" class="badge-need-review">Need Review</option> 
+                  <?php if ($_SESSION['role_id']!=3):?>
+                    <option value="Revision" class="badge-revision">Revision</option>
+                    <option value="Approved" class="badge-approved">Approved</option>
+                    <option value="Published" class="badge-published">Published</option>
+                  <?php else: ?>
+                    <option value="Approved" class="badge-approved">Approved</option>
+                  <?php endif; ?>
                   <option value="Cancel" class="badge-cancel">Cancel</option>
                 </select>
               </div>
