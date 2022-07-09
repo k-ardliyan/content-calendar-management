@@ -49,15 +49,12 @@ $category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
   <script>
     // variable global untuk menyimpan data konten
     const _events = {};
-    const _session = {
-      team_id: <?php echo $_SESSION['team_id']; ?>,
-      role: <?php echo $_SESSION['role_id']; ?>
-    };
+    const _session = {team_id: <?= $_SESSION['team_id']; ?>, role: <?= $_SESSION['role_id']; ?>};
   </script>
   <script src="fc.js"></script>
   <!-- DataTables -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/sl-1.4.0/datatables.min.css"/>
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/sl-1.4.0/datatables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css"/>
+  <script type="text/javascript" src="assets/js/datatables.min.js"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 
   
@@ -183,14 +180,15 @@ $category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
+  <script src="assets/js/jquery.nicescroll.min.js"></script>
   <script src="assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <!-- Add Swal -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="assets/js/sweetalert2@11.js"></script>
   <script src="fcb.js"></script>
   
   <!-- Template JS File -->
@@ -204,6 +202,4 @@ $category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
 
 </html>
 
-<?php 
-$pdo = null;
-?>
+<?php $pdo = null;?>

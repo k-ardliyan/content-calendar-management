@@ -13,11 +13,10 @@ if (isset($_SESSION['team_id'])) {
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="assets/images/logo.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="assets/css/toastr.min.css">
 	<link rel="stylesheet" href="assets/css/my-login.css">
 	<title>Login &mdash; Content Calendar Management</title>
 </head>
@@ -82,7 +81,7 @@ if (isset($_SESSION['team_id'])) {
 
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="assets/js/toastr.min.js"></script>
 	<script src="assets/js/my-login.js"></script>
 	<script>
 		$('#formLogin').submit(function(e) {

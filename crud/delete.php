@@ -8,32 +8,31 @@ $deletePillar = isset($_POST['deletePillar']) ? $_POST['deletePillar'] : false;
 
 if ($deleteCategory == true) {
     $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : '';
-    $stmt = $pdo->prepare("DELETE FROM calendar_content_categories WHERE id = :id");
-    $stmt->bindParam(':id', $idCategory);
-    $result = $stmt->execute();
-    if ($result) {
+    // try catch block to handle error
+    try {
+        $stmt = $pdo->prepare("DELETE FROM calendar_content_categories WHERE id = :id");
+        $stmt->bindParam(':id', $idCategory);
+        $stmt->execute();
         $status = 200;
         $message = "Success delete category";
-    } else {
+    } catch (PDOException $e) {
         $status = 400;
-        $message = "Failed delete category";
-        
+        $message = "This category is already used in content";
     }
 } else if ($deletePillar == true) {
-    $idPillar = isset($_POST['idPillar']) ? $_POST['idPillar'] : '';
-    $stmt = $pdo->prepare("DELETE FROM content_pillars WHERE id = :id");
-    $stmt->bindParam(':id', $idPillar);
-    $result = $stmt->execute();
-    if ($result) {
+    // try catch block to handle error
+    try {
+        $stmt = $pdo->prepare("DELETE FROM calendar_content_pillar WHERE id = :id");
+        $stmt->bindParam(':id', $_POST['idPillar']);
+        $stmt->execute();
         $status = 200;
         $message = "Success delete pillar";
-    } else {
+    } catch (PDOException $e) {
         $status = 400;
-        $message = "Failed delete pillar";
+        $message = "This pillar is already used in content";
     }
 } else if ($deleteContent == true) {
     $idContent = isset($_POST['idContent']) ? $_POST['idContent'] : '';
-    // with cascade on table calendar_content_revisions
     $stmt = $pdo->prepare("DELETE FROM calendar_contents WHERE id = :id");
     $stmt->bindParam(':id', $idContent);
     $result = $stmt->execute();

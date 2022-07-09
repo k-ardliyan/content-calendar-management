@@ -18,7 +18,7 @@ if (isset($_SESSION['team_id'])) {
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="shortcut icon" href="assets/images/logo.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="assets/css/toastr.min.css">
 	<link rel="stylesheet" href="assets/css/my-login.css">
 	<title>Register &mdash; Content Calendar Management</title>
 </head>
@@ -36,7 +36,7 @@ if (isset($_SESSION['team_id'])) {
 							<form id="formRegister" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" class="form-control" name="name" required autofocus autocomplete="off">
 									<div class="invalid-feedback">
 										What's your name?
 									</div>
@@ -44,7 +44,7 @@ if (isset($_SESSION['team_id'])) {
 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" required>
+									<input id="email" type="email" class="form-control" name="email" required autocomplete="off">
 									<div class="invalid-feedback">
 										Your email is invalid
 									</div>
@@ -89,7 +89,7 @@ if (isset($_SESSION['team_id'])) {
 
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="assets/js/toastr.min.js"></script>
 	<script src="assets/js/my-login.js"></script>
 	<script>
 		$('#formRegister').submit(function(e) {
