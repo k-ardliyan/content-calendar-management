@@ -26,13 +26,16 @@ $(document).ready(function () {
             const id = event.id_content;
             const category = event.name_category;
             const name = event.name_content;
-            const content = event.content_content;
-            const copywriting = event.copywriting_content;
+            const content = event.content_content.replace(/\n/g, '<br/>');
+            const copywriting = event.copywriting_content.replace(/\n/g, '<br/>');
             const status = event.status_content;
             const pillarName = event.name_pillar;
             const color = event.color;
             const url = event.url_content;
             const revision = event.revision;
+            if (revision != null) {
+                revision.replace(/\n/g, "<br />");
+            }
             const reviewer = event.reviewer;
 
             // Setting Waktu = getDay, getDate, getMonth, getFullYear
@@ -46,11 +49,18 @@ $(document).ready(function () {
             const time = event.time_content.split(':');
             const timeString = time[0] + ':' + time[1];
 
+            // change datetime created_at with time
+            const createdAtRevision = new Date(event.created_at_revision);
+            const updatedAtRevision = new Date(event.updated_at_revision);
+            // handle zero value on hour and minute
+            const createdAtRevisionString = createdAtRevision.getDate() + ' ' + months[createdAtRevision.getMonth()] + ' ' + createdAtRevision.getFullYear() + ' - ' + (createdAtRevision.getHours() < 10 ? '0' + createdAtRevision.getHours() : createdAtRevision.getHours()) + ':' + (createdAtRevision.getMinutes() < 10 ? '0' + createdAtRevision.getMinutes() : createdAtRevision.getMinutes());
+            const updatedAtRevisionString = updatedAtRevision.getDate() + ' ' + months[updatedAtRevision.getMonth()] + ' ' + updatedAtRevision.getFullYear() + ' - ' + (updatedAtRevision.getHours() < 10 ? '0' + updatedAtRevision.getHours() : updatedAtRevision.getHours()) + ':' + (updatedAtRevision.getMinutes() < 10 ? '0' + updatedAtRevision.getMinutes() : updatedAtRevision.getMinutes());
+
             // Tampilan Detail Modal Konten
             $('#detailCategory').text(category + ' |');
             $('#detailName').text(name);
-            $('#detailContent').text(content);
-            $('#detailCopywriting').text(copywriting);
+            $('#detailContent').html(content);
+            $('#detailCopywriting').html(copywriting);
             $('#detailStatus').text(status);
             $('#detailStatus').css('background-color', color);
             $('#detailPillar').text(pillarName);
@@ -74,9 +84,9 @@ $(document).ready(function () {
                     $('#detailReviewer').addClass('font-italic');
                     $('#detailRevision').addClass('font-italic');
                 } else {
-                    $('#detailRevision').text(revision);
+                    $('#detailRevision').html(revision);
                     $('#detailReviewer').removeClass('font-italic');
-                    $('#detailReviewer').text(reviewer);
+                    $('#detailReviewer').html(reviewer + '<br/><i class="far fa-clock"></i> ' + (updatedAtRevisionString ? updatedAtRevisionString : createdAtRevisionString));
                 }
                 $('#detailRevision').removeClass('d-none');
                 $('#detailRevisionContainer').removeClass('d-none');

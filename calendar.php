@@ -98,7 +98,7 @@ $category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
           </div>
           <ul class="sidebar-menu">
               <li class="menu-header">Main Menu</li>
-              <li class=""><a class="nav-link" href="#"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+              <li class=""><a class="nav-link" href="dashboard.php"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="active"><a class="nav-link" href="#"><i class="far fa-calendar"></i> <span>Calendar</span></a></li>
               <li class="menu-header">Settings</li>
               <li><a class="nav-link" href="#"><i class="far fa-user"></i> <span>Users</span></a></li>

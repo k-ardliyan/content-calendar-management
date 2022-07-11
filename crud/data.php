@@ -27,6 +27,8 @@ $sql = "SELECT
             ccr.id as id_revision,
             ccr.revision as revision,
             ccr.calendar_content_id as content_id_revision,
+            ccr.created_at as created_at_revision,
+            ccr.updated_at as updated_at_revision,
             ccr.team_id as team_id_revision,
             t2.name as reviewer
         FROM calendar_contents cc 
