@@ -36,13 +36,13 @@
               <div class="form-group col-md-6">
                 <label for="selectStatus">Status</label>
                 <select name="selectStatus" id="selectStatus" class="form-control">
-                  <option value="Plan" class="badge-plan">Plan</option>
-                  <option value="Ongoing" class="badge-ongoing">Ongoing</option>
-                  <option value="Need Review" class="badge-need-review">Need Review</option>
-                  <option value="Revision" class="badge-revision">Revision</option>
-                  <option value="Approved" class="badge-approved">Approved</option>
-                  <option value="Published" class="badge-published">Published</option>
-                  <option value="Cancel" class="badge-cancel">Cancel</option>
+                  <option value="Plan" class="pillar badge-plan">Plan</option>
+                  <option value="Ongoing" class="pillar badge-ongoing">Ongoing</option>
+                  <option value="Need Review" class="pillar badge-need-review">Need Review</option>
+                  <option value="Revision" class="pillar badge-revision">Revision</option>
+                  <option value="Approved" class="pillar badge-approved">Approved</option>
+                  <option value="Published" class="pillar badge-published">Published</option>
+                  <option value="Cancel" class="pillar badge-cancel">Cancel</option>
                 </select>
               </div>
               <div class="form-group col-md-6">

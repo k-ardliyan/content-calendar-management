@@ -4,7 +4,7 @@ session_start();
 // condition to check if the user is logged in
 if (isset($_SESSION['team_id'])) {
 	// if the user is logged in, redirect to the dashboard
-	header("Location: index.php");
+	header("Location: calendar.php");
 }
 
 ?>

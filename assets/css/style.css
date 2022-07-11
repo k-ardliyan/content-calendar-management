@@ -4,33 +4,34 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.pillar {
+    color: whitesmoke;
+}
+
 .badge-plan {
-    background-color: lightgray;
+    background-color: #6c757d;
 }
 
 .badge-ongoing {
-    background-color: yellow;
+    background-color: #ffc107;
 }
 
 .badge-need-review {
-    background-color: orange;
+    background-color: #fd7e14;
 }
 
 .badge-revision {
-    background: black;
-    color: white;
+    background: #252728;
 }
 
 .badge-approved {
-    background-color: skyblue;
+    background-color: #17a2b8;
 }
 
 .badge-published {
-    background-color: green;
-    color: white;
+    background-color: #28a745;
 }
 
 .badge-cancel {
-    background-color: red;
-    color: white;
+    background-color: #dc3545;
 }

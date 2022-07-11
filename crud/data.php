@@ -44,25 +44,25 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     switch ($row['status_content']) {
         case 'Plan':
-            $row['color'] = "grey";
+            $row['color'] = "#6c757d"; // gray
             break;
         case 'Ongoing':
-            $row['color'] = "yellow";
+            $row['color'] = "#ffc107"; // yellow
             break;
         case 'Need Review':
-            $row['color'] = "orange";
+            $row['color'] = "#fd7e14"; // orange
             break;
         case 'Revision':
-            $row['color'] = "black";
+            $row['color'] = "#252728"; // black
             break;
         case 'Approved':
-            $row['color'] = "skyblue";
+            $row['color'] = "#17a2b8"; // blue
             break;
         case 'Published':
-            $row['color'] = "green";
+            $row['color'] = "#28a745"; // green
             break;
         case 'Cancel':
-            $row['color'] = "red";
+            $row['color'] = "#dc3545"; // red
             break;
         default:
             $row['color'] = "white";
