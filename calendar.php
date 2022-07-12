@@ -101,7 +101,7 @@ $category = isset($_GET['c']) ? $_GET['c'] : $result[0]['id'];
               <li class=""><a class="nav-link" href="dashboard.php"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="active"><a class="nav-link" href="#"><i class="far fa-calendar"></i> <span>Calendar</span></a></li>
               <li class="menu-header">Settings</li>
-              <?php if($_SESSION['role_id'!=3]):?>
+              <?php if($_SESSION['role_id']!=3):?>
               <li><a class="nav-link" href="users.php"><i class="far fa-user"></i> <span>Users</span></a></li>
               <?php endif;?>
               <li><a class="nav-link text-danger" href="javascript:logout();"><i class="fas fa-sign-out-alt" style="transform: scale(-1, 1);"></i> <span>Logout</span></a></li>
