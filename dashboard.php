@@ -79,6 +79,25 @@ $stmtCancel = $pdo->prepare($sqlCancel);
 $stmtCancel->execute();
 $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
 
+// count status Published with last week use day on content
+$sqlPublishedLastWeek = "SELECT COUNT(*) AS total, DAYNAME(updated_at) AS date_publish FROM calendar_contents WHERE status = 'Published' AND DATE_SUB(NOW(), INTERVAL 7 DAY) <= updated_at GROUP BY date_publish;";
+$stmtPublishedLastWeek = $pdo->prepare($sqlPublishedLastWeek);
+$stmtPublishedLastWeek->execute();
+$resultPublishedLastWeek = $stmtPublishedLastWeek->fetchAll(PDO::FETCH_ASSOC);
+
+// count status Published with month on content
+$sqlPublishedMonth = "SELECT COUNT(*) AS total, MONTHNAME(updated_at) AS date_publish FROM calendar_contents WHERE status = 'Published' AND DATE_SUB(NOW(), INTERVAL 1 YEAR) <= updated_at GROUP BY date_publish;";
+$stmtPublishedMonth = $pdo->prepare($sqlPublishedMonth);
+$stmtPublishedMonth->execute();
+$resultPublishedMonth = $stmtPublishedMonth->fetchAll(PDO::FETCH_ASSOC);
+
+// recent activity user from calendar_contents join teams
+$sqlRecentActivity = "SELECT cc.name content_name, cc.created_at content_created_at, t.name team_name, t.role_id team_role
+                      FROM calendar_contents cc JOIN teams t ON cc.team_id = t.id ORDER BY cc.id DESC LIMIT 5";
+$stmtRecentActivity = $pdo->prepare($sqlRecentActivity);
+$stmtRecentActivity->execute();
+$resultRecentActivity = $stmtRecentActivity->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,24 +200,6 @@ $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
                 <div class="card card-statistic-2">
                   <div class="card-stats">
                     <div class="card-stats-title">Status Statistics
-                      <!-- <div class="dropdown d-inline">
-                        <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">July</a>
-                        <ul class="dropdown-menu dropdown-menu-sm">
-                          <li class="dropdown-title">Select Month</li>
-                          <li><a href="#" class="dropdown-item">January</a></li>
-                          <li><a href="#" class="dropdown-item">February</a></li>
-                          <li><a href="#" class="dropdown-item">March</a></li>
-                          <li><a href="#" class="dropdown-item">April</a></li>
-                          <li><a href="#" class="dropdown-item">May</a></li>
-                          <li><a href="#" class="dropdown-item">June</a></li>
-                          <li><a href="#" class="dropdown-item active">July</a></li>
-                          <li><a href="#" class="dropdown-item">August</a></li>
-                          <li><a href="#" class="dropdown-item">September</a></li>
-                          <li><a href="#" class="dropdown-item">October</a></li>
-                          <li><a href="#" class="dropdown-item">November</a></li>
-                          <li><a href="#" class="dropdown-item">December</a></li>
-                        </ul>
-                      </div> -->
                     </div>
                     <div class="card-stats-items">
                       <div class="card-stats-item">
@@ -302,88 +303,61 @@ $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="row">
               <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-                <div class="card">
+                <div class="card h-100">
                   <div class="card-header">
                     <h4>Statistics</h4>
                     <div class="card-header-action">
-                      <div class="btn-group">
-                        <a href="#" class="btn btn-primary">Week</a>
-                        <a href="#" class="btn">Month</a>
-                      </div>
+                      <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="btn-group" role="presentation">
+                          <a class="btn active" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="true">Week</a>
+                          <a class="btn" id="pills-month-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="false">Month</a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
-                  <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="myChart" style="display: block; width: 789px; height: 478px;" class="chartjs-render-monitor" width="789" height="478"></canvas>
-                    <div class="statistic-details mt-sm-4">
-                      <div class="statistic-details-item">
-                        <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</span>
-                        <div class="detail-value">$243</div>
-                        <div class="detail-name">Today's Sales</div>
+                  <div class="card-body">
+                    <div class="tab-content" id="pills-tabContent">
+                      <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
+                        <canvas id="myChartWeek" style="display: block; width: 789px; height: 478px;" class="chartjs-render-monitor" width="789" height="478"></canvas>
                       </div>
-                      <div class="statistic-details-item">
-                        <span class="text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</span>
-                        <div class="detail-value">$2,902</div>
-                        <div class="detail-name">This Week's Sales</div>
-                      </div>
-                      <div class="statistic-details-item">
-                        <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</span>
-                        <div class="detail-value">$12,821</div>
-                        <div class="detail-name">This Month's Sales</div>
-                      </div>
-                      <div class="statistic-details-item">
-                        <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</span>
-                        <div class="detail-value">$92,142</div>
-                        <div class="detail-name">This Year's Sales</div>
+                      <div class="tab-pane fade" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+                        <canvas id="myChartMonth" style="display: block; width: 789px; height: 478px;" class="chartjs-render-monitor" width="789" height="478"></canvas>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-                <div class="card">
+                <div class="card h-100">
                   <div class="card-header">
-                    <h4>Recent Activities</h4>
+                    <h4>Recent Contents</h4>
                   </div>
                   <div class="card-body">
                     <ul class="list-unstyled list-unstyled-border">
-                      <li class="media">
-                        <img class="mr-3 rounded-circle" src="../assets/img/avatar/avatar-1.png" alt="avatar" width="50">
-                        <div class="media-body">
-                          <div class="float-right text-primary">Now</div>
-                          <div class="media-title">Farhan A Mujib</div>
-                          <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img class="mr-3 rounded-circle" src="../assets/img/avatar/avatar-2.png" alt="avatar" width="50">
-                        <div class="media-body">
-                          <div class="float-right">12m</div>
-                          <div class="media-title">Ujang Maman</div>
-                          <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img class="mr-3 rounded-circle" src="../assets/img/avatar/avatar-3.png" alt="avatar" width="50">
-                        <div class="media-body">
-                          <div class="float-right">17m</div>
-                          <div class="media-title">Rizal Fakhri</div>
-                          <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img class="mr-3 rounded-circle" src="../assets/img/avatar/avatar-4.png" alt="avatar" width="50">
-                        <div class="media-body">
-                          <div class="float-right">21m</div>
-                          <div class="media-title">Alfa Zulkarnain</div>
-                          <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                        </div>
-                      </li>
+                      <?php foreach($resultRecentActivity as $value):?>
+                        <li class="media">
+                          <?php if($value['team_role']==3):?>
+                            <img class="mr-3 rounded-circle" src="assets/images/avatar/avatar-2.png" alt="avatar" width="50">
+                          <?php elseif($value['team_role']==2):?>
+                            <img class="mr-3 rounded-circle" src="assets/images/avatar/avatar-3.png" alt="avatar" width="50">
+                          <?php else:?>
+                            <img class="mr-3 rounded-circle" src="assets/images/avatar/avatar-5.png" alt="avatar" width="50">
+                          <?php endif;?>
+                          <div class="media-body">
+                            <div class="float-right text-primary">
+                              <?php
+                                // date format for recent activity
+                                $date = date_create($value['content_created_at']);
+                                $date = date_format($date, 'd M Y H:i');
+                                echo $date;
+                              ?>
+                            </div>
+                            <div class="media-title"><?=$value['team_name']?></div>
+                            <span class="text-small text-muted"><?=$value['content_name']?></span>
+                          </div>
+                        </li>
+                      <?php endforeach;?>
                     </ul>
-                    <div class="text-center pt-1 pb-1">
-                      <a href="#" class="btn btn-primary btn-lg btn-round">
-                        View All
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -424,14 +398,29 @@ $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
 
   <!-- Page Specific JS File -->
   <script>
-    var statistics_chart = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(statistics_chart, {
+    // Statistic Chart Week
+    var arrayStatsWeek = <?php echo json_encode($resultPublishedLastWeek); ?>;
+    var arrayStatsWeekObject = {};
+    for (var i = 0; i < arrayStatsWeek.length; i++) {
+      arrayStatsWeekObject[arrayStatsWeek[i]['date_publish']] = arrayStatsWeek[i]['total'];
+    }
+
+    var statistics_chart_week = document.getElementById("myChartWeek").getContext('2d');
+    var myChartWeek = new Chart(statistics_chart_week, {
       type: 'line',
       data: {
         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         datasets: [{
-          label: 'Statistics',
-          data: [640, 387, 530, 302, 430, 270, 488],
+          label: 'Total Publish',
+          data: [
+            arrayStatsWeekObject.Sunday,
+            arrayStatsWeekObject.Monday,
+            arrayStatsWeekObject.Tuesday,
+            arrayStatsWeekObject.Wednesday,
+            arrayStatsWeekObject.Thursday,
+            arrayStatsWeekObject.Friday,
+            arrayStatsWeekObject.Saturday
+          ],
           borderWidth: 5,
           borderColor: '#6777ef',
           backgroundColor: 'transparent',
@@ -447,7 +436,7 @@ $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
         scales: {
           yAxes: [{
             gridLines: {
-              display: false,
+              display: true,
               drawBorder: false,
             },
             ticks: {
@@ -457,7 +446,69 @@ $resultCancel = $stmtCancel->fetch(PDO::FETCH_ASSOC);
           xAxes: [{
             gridLines: {
               color: '#fbfbfb',
-              lineWidth: 2
+              lineWidth: 2,
+              display: true
+            }
+          }]
+        },
+      }
+    });
+
+    // Statistic Chart Month
+    var arrayStatsMonth = <?php echo json_encode($resultPublishedMonth); ?>;
+    var arrayStatsMonthObject = {};
+    for (var i = 0; i < arrayStatsMonth.length; i++) {
+      arrayStatsMonthObject[arrayStatsMonth[i]['date_publish']] = arrayStatsMonth[i]['total'];
+    }
+    
+    var statistics_chart_month = document.getElementById("myChartMonth").getContext('2d');
+    var myChartMonth = new Chart(statistics_chart_month, {
+      type: 'line',
+      data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+          label: 'Total Publish',
+          data: [
+            arrayStatsMonthObject.January,
+            arrayStatsMonthObject.February,
+            arrayStatsMonthObject.March,
+            arrayStatsMonthObject.April,
+            arrayStatsMonthObject.May,
+            arrayStatsMonthObject.June,
+            arrayStatsMonthObject.July,
+            arrayStatsMonthObject.August,
+            arrayStatsMonthObject.September,
+            arrayStatsMonthObject.October,
+            arrayStatsMonthObject.November,
+            arrayStatsMonthObject.December
+          ],
+          borderWidth: 5,
+          borderColor: '#6777ef',
+          backgroundColor: 'transparent',
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#6777ef',
+          pointRadius: 4
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: false,
+            },
+            ticks: {
+              stepSize: 150
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              color: '#fbfbfb',
+              lineWidth: 2,
+              display: true
             }
           }]
         },

@@ -1,5 +1,8 @@
 <?php 
   
+
+  header("Location: login.php");
+
 require_once 'config/db.php';
 
 // $_SESSION['team_id'] = 1;

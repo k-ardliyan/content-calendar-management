@@ -104,7 +104,7 @@ if (isset($_SESSION['team_id'])) {
 							progressBar: true,
 							timeOut: 1000,
 							onHidden: function() {
-								window.location.href = 'calendar.php';
+								window.location.href = 'dashboard.php';
 							}
 						});
 					} else {
