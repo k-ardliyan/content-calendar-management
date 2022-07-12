@@ -7,6 +7,7 @@ session_start();
 $updateCategory = isset($_POST['updateCategory']) ? $_POST['updateCategory'] : false;
 $updateContent = isset($_POST['updateContent']) ? $_POST['updateContent'] : false;
 $updatePillar = isset($_POST['updatePillar']) ? $_POST['updatePillar'] : false;
+$updateRole = isset($_POST['updateRole']) ? $_POST['updateRole'] : false;
 
 if ($updateCategory == true) {
     $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : '';
@@ -130,6 +131,20 @@ if ($updateCategory == true) {
                 $message = "Failed insert revision";
             }
         }
+    }
+} else if ($updateRole == true) {
+    $id = isset($_POST['id']) ? $_POST['id'] : '';
+    $teamId = isset($_POST['role']) ? $_POST['role'] : '';
+    $stmt = $pdo->prepare("UPDATE teams SET role_id = :role_id WHERE id = :id");
+    $stmt->bindParam(':role_id', $teamId);
+    $stmt->bindParam(':id', $id);
+    $result = $stmt->execute();
+    if ($result) {
+        $status = 200;
+        $message = "Success update role";
+    } else {
+        $status = 400;
+        $message = "Failed update role";
     }
 }
 

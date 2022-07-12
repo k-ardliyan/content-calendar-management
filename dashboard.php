@@ -93,7 +93,7 @@ $resultPublishedMonth = $stmtPublishedMonth->fetchAll(PDO::FETCH_ASSOC);
 
 // recent activity user from calendar_contents join teams
 $sqlRecentActivity = "SELECT cc.name content_name, cc.created_at content_created_at, t.name team_name, t.role_id team_role
-                      FROM calendar_contents cc JOIN teams t ON cc.team_id = t.id ORDER BY cc.id DESC LIMIT 5";
+                      FROM calendar_contents cc JOIN teams t ON cc.team_id = t.id ORDER BY cc.id DESC LIMIT 6";
 $stmtRecentActivity = $pdo->prepare($sqlRecentActivity);
 $stmtRecentActivity->execute();
 $resultRecentActivity = $stmtRecentActivity->fetchAll(PDO::FETCH_ASSOC);
@@ -180,7 +180,9 @@ $resultRecentActivity = $stmtRecentActivity->fetchAll(PDO::FETCH_ASSOC);
               <li class="active"><a class="nav-link" href="#"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class=""><a class="nav-link" href="calendar.php"><i class="far fa-calendar"></i> <span>Calendar</span></a></li>
               <li class="menu-header">Settings</li>
-              <li><a class="nav-link" href="#"><i class="far fa-user"></i> <span>Users</span></a></li>
+              <?php if($_SESSION['role_id']!=3):?>
+              <li><a class="nav-link" href="users.php"><i class="far fa-user"></i> <span>Users</span></a></li>
+              <?php endif;?>
               <li><a class="nav-link text-danger" href="javascript:logout();"><i class="fas fa-sign-out-alt" style="transform: scale(-1, 1);"></i> <span>Logout</span></a></li>
             </ul>
         </aside>
@@ -309,7 +311,7 @@ $resultRecentActivity = $stmtRecentActivity->fetchAll(PDO::FETCH_ASSOC);
                     <div class="card-header-action">
                       <ul class="nav nav-pills" id="pills-tab" role="tablist">
                         <li class="btn-group" role="presentation">
-                          <a class="btn active" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="true">Week</a>
+                          <a class="btn active" id="pills-week-tab" data-toggle="pill" href="#pills-week" role="tab" aria-controls="pills-week" aria-selected="true">Last Week</a>
                           <a class="btn" id="pills-month-tab" data-toggle="pill" href="#pills-month" role="tab" aria-controls="pills-month" aria-selected="false">Month</a>
                         </li>
                       </ul>
@@ -383,7 +385,7 @@ $resultRecentActivity = $stmtRecentActivity->fetchAll(PDO::FETCH_ASSOC);
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script> -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
   <script src="assets/js/jquery.nicescroll.min.js"></script>
-  <script src="../assets/js/stisla.js"></script>
+  <script src="assets/js/stisla.js"></script>
   
   <!-- JS Libraies -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
